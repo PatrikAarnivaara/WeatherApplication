@@ -1,9 +1,10 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
 import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
-export default function App() {
+function HomeScreen() {
 	return (
 		<View style={styles.container}>
 			<LinearGradient
@@ -11,6 +12,7 @@ export default function App() {
 				colors={['#47BFDF', '#4A91FF', 192.05]}
 				style={styles.background}
 			/>
+			<Text>Hello World</Text>
 		</View>
 	);
 }
@@ -30,3 +32,17 @@ const styles = StyleSheet.create({
 		height: 700,
 	},
 });
+
+const Stack = createStackNavigator();
+
+const App = () => {
+	return (
+		<NavigationContainer>
+			<Stack.Navigator>
+				<Stack.Screen name="Home" component={HomeScreen} />
+			</Stack.Navigator>
+		</NavigationContainer>
+	);
+};
+
+export default App;

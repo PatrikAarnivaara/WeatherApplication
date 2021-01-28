@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, StyleSheet, Text, View, FlatList, ActivityIndicator } from 'react-native';
+import { Button, StyleSheet, Text, TouchableOpacity, View, FlatList, ActivityIndicator } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import openWeatherMapApi from '../../api/openWeatherMapApi';
 
@@ -20,7 +20,9 @@ const HomeScreen = ({ navigation }) => {
 		getWeatherData();
 	}, [setWeatherData]);
 
-	console.log(weatherData.map((element) => element.coord.lon));
+	const presshandler = (id) => {
+		console.log(id);
+	};
 
 	return (
 		<View style={styles.container}>
@@ -40,11 +42,13 @@ const HomeScreen = ({ navigation }) => {
 			) : (
 				<FlatList
 					data={weatherData}
-					keyExtractor={( item ) => item.id.toString()}
+					keyExtractor={(item) => item.id.toString()}
 					renderItem={({ item }) => (
-						<Text>
-							{item.main.temp} °C,{item.name}, id: {item.id}
-						</Text>
+						<TouchableOpacity onPress={() => presshandler(item.id)}>
+							<Text>
+								{item.main.temp} °C,{item.name}, id: {item.id}
+							</Text>
+						</TouchableOpacity>
 					)}
 				/>
 			)}

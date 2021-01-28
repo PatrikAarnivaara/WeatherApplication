@@ -5,6 +5,7 @@ import openWeatherMapApi from '../../api/openWeatherMapApi';
 
 const HomeScreen = ({ navigation }) => {
 	const [weatherData, setWeatherData] = useState([]);
+	const [selectedCity, setSelectedCity] = useState('')
 	const [isLoading, setLoading] = useState(true);
 
 	useEffect(() => {
@@ -22,6 +23,7 @@ const HomeScreen = ({ navigation }) => {
 
 	const presshandler = (id) => {
 		console.log(id);
+		setSelectedCity(id)
 	};
 
 	return (
@@ -52,6 +54,7 @@ const HomeScreen = ({ navigation }) => {
 					)}
 				/>
 			)}
+			<Text>{selectedCity}</Text>
 		</View>
 	);
 };

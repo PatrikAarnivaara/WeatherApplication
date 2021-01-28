@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Button, StyleSheet, Text, View } from 'react-native';
+import { Button, StyleSheet, Text, View, FlatList, ActivityIndicator,ScrollView } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import openWeatherMapApi from '../../api/openWeatherMapApi';
 
 const HomeScreen = ({ navigation }) => {
 	const [weatherData, setWeatherData] = useState([]);
+	const [isLoading, setLoading] = useState(true);
 
 	useEffect(() => {
 		const getWeatherData = async () => {
@@ -18,8 +19,7 @@ const HomeScreen = ({ navigation }) => {
 		getWeatherData();
 	}, [setWeatherData]);
 
-
-	console.log(weatherData[2])
+	console.log(weatherData.map((element) => element.coord.lon));
 
 	return (
 		<View style={styles.container}>
@@ -34,7 +34,13 @@ const HomeScreen = ({ navigation }) => {
 					});
 				}}
 			/>
-			{/* {weatherData && <Text> {weatherData.clouds}</Text>} */}
+			<ScrollView>
+				{weatherData.map((item) => (
+					<View key={item.id}>
+						<Text>{item.main.temp}  °C,{item.name}</Text>
+					</View>
+				))}
+			</ScrollView>
 		</View>
 	);
 };

@@ -40,10 +40,10 @@ const HomeScreen = ({ navigation }) => {
 			) : (
 				<FlatList
 					data={weatherData}
-					keyExtractor={({ id }) => id.toString()}
+					keyExtractor={( item ) => item.id.toString()}
 					renderItem={({ item }) => (
 						<Text>
-							{item.main.temp} °C,{item.name}
+							{item.main.temp} °C,{item.name}, id: {item.id}
 						</Text>
 					)}
 				/>

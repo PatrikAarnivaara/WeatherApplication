@@ -11,15 +11,12 @@ const HomeScreen = ({ navigation }) => {
 			try {
 				const response = await openWeatherMapApi('London');
 				setWeatherData(response);
-				console.log(response);
 			} catch (error) {
 				console.log(error);
 			}
 		};
 		getWeatherData();
 	}, [setWeatherData]);
-
-	console.log(weatherData);
 
 	return (
 		<View style={styles.container}>

@@ -1,32 +1,20 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { LinearGradient } from 'expo-linear-gradient';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useEffect } from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import HomeScreen from './src/screens/HomeScreen';
+import DetailsScreen from './src/screens/DetailsScreen';
 
-export default function App() {
+const Stack = createStackNavigator();
+
+const App = () => {
 	return (
-		<View style={styles.container}>
-			<LinearGradient
-				// Background Linear Gradient
-				colors={['#47BFDF', '#4A91FF', 192.05]}
-				style={styles.background}
-			/>
-		</View>
+		<NavigationContainer>
+			<Stack.Navigator initialRouteName="Home">
+				<Stack.Screen name="Home" component={HomeScreen} options={{ title: 'Home' }} />
+				<Stack.Screen name="Details" component={DetailsScreen} />
+			</Stack.Navigator>
+		</NavigationContainer>
 	);
-}
+};
 
-const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		alignItems: 'center',
-		justifyContent: 'center',
-		backgroundColor: '#fff',
-	},
-	background: {
-		position: 'absolute',
-		left: 0,
-		right: 0,
-		top: 0,
-		height: 700,
-	},
-});
+export default App;

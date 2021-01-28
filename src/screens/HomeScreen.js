@@ -4,7 +4,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import openWeatherMapApi from '../../api/openWeatherMapApi';
 
 const HomeScreen = ({ navigation }) => {
-	const [weatherData, setWeatherData] = useState();
+	const [weatherData, setWeatherData] = useState([]);
 
 	useEffect(() => {
 		const getWeatherData = async () => {
@@ -19,7 +19,7 @@ const HomeScreen = ({ navigation }) => {
 	}, [setWeatherData]);
 
 
-	console.log(weatherData)
+	console.log(weatherData[2])
 
 	return (
 		<View style={styles.container}>

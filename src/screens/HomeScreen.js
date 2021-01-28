@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, StyleSheet, Text, View, FlatList, ActivityIndicator,ScrollView } from 'react-native';
+import { Button, StyleSheet, Text, View, FlatList, ActivityIndicator } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import openWeatherMapApi from '../../api/openWeatherMapApi';
 
@@ -12,6 +12,7 @@ const HomeScreen = ({ navigation }) => {
 			try {
 				const response = await openWeatherMapApi();
 				setWeatherData(response);
+				setLoading(false);
 			} catch (error) {
 				console.log(error);
 			}
@@ -34,13 +35,19 @@ const HomeScreen = ({ navigation }) => {
 					});
 				}}
 			/>
-			<ScrollView>
-				{weatherData.map((item) => (
-					<View key={item.id}>
-						<Text>{item.main.temp}  °C,{item.name}</Text>
-					</View>
-				))}
-			</ScrollView>
+			{isLoading ? (
+				<ActivityIndicator />
+			) : (
+				<FlatList
+					data={weatherData}
+					keyExtractor={({ id }) => id.toString()}
+					renderItem={({ item }) => (
+						<Text>
+							{item.main.temp} °C,{item.name}
+						</Text>
+					)}
+				/>
+			)}
 		</View>
 	);
 };

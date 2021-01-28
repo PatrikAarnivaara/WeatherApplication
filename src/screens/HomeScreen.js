@@ -1,14 +1,31 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, StyleSheet, Text, View } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-/* import { OPEN_WEATHER_MAP_API_KEY } from '@env' */
+import openWeatherMapApi from '../../api/openWeatherMapApi';
 
 const HomeScreen = ({ navigation }) => {
+	const [weatherData, setWeatherData] = useState('');
+
+	useEffect(() => {
+		const getWeatherData = async () => {
+			try {
+				const response = await openWeatherMapApi('London');
+				setWeatherData(response);
+				console.log(response);
+			} catch (error) {
+				console.log(error);
+			}
+		};
+		getWeatherData();
+	}, [setWeatherData]);
+
+	console.log(weatherData);
+
 	return (
 		<View style={styles.container}>
 			<LinearGradient colors={['#47BFDF', '#4A91FF', 192.05]} style={styles.background} />
 			<Button
-				title={process.env.OPEN_WEATHER_MAP_API_KEY}
+				title={'Go to details'}
 				onPress={() => {
 					/* 1. Navigate to the Details route with params */
 					navigation.navigate('Details', {
@@ -17,6 +34,7 @@ const HomeScreen = ({ navigation }) => {
 					});
 				}}
 			/>
+			{/* {weatherData && <Text> {weatherData.clouds}</Text>} */}
 		</View>
 	);
 };

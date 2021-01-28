@@ -5,7 +5,7 @@ import openWeatherMapApi from '../../api/openWeatherMapApi';
 
 const HomeScreen = ({ navigation }) => {
 	const [weatherData, setWeatherData] = useState([]);
-	const [selectedCity, setSelectedCity] = useState('')
+	const [selectedCity, setSelectedCity] = useState({ city: '', temp: '' });
 	const [isLoading, setLoading] = useState(true);
 
 	useEffect(() => {
@@ -21,24 +21,24 @@ const HomeScreen = ({ navigation }) => {
 		getWeatherData();
 	}, [setWeatherData]);
 
-	const presshandler = (id) => {
-		console.log(id);
-		setSelectedCity(id)
+	const presshandler = (item) => {
+		setSelectedCity({ ...selectedCity, city: item.name, temp: item.main.temp });
 	};
 
 	return (
 		<View style={styles.container}>
 			<LinearGradient colors={['#47BFDF', '#4A91FF', 192.05]} style={styles.background} />
-			<Button
+
+			{/* <Button
 				title={'Go to details'}
 				onPress={() => {
-					/* 1. Navigate to the Details route with params */
+					
 					navigation.navigate('Details', {
 						itemId: 86,
 						otherParam: 'anything you want here',
 					});
 				}}
-			/>
+			/> */}
 			{isLoading ? (
 				<ActivityIndicator />
 			) : (
@@ -46,7 +46,7 @@ const HomeScreen = ({ navigation }) => {
 					data={weatherData}
 					keyExtractor={(item) => item.id.toString()}
 					renderItem={({ item }) => (
-						<TouchableOpacity onPress={() => presshandler(item.id)}>
+						<TouchableOpacity onPress={() => presshandler(item)}>
 							<Text>
 								{item.main.temp} °C,{item.name}, id: {item.id}
 							</Text>
@@ -54,7 +54,9 @@ const HomeScreen = ({ navigation }) => {
 					)}
 				/>
 			)}
-			<Text>{selectedCity}</Text>
+			<TouchableOpacity onPress={() => navigation.navigate('Details', selectedCity)}>
+				<Text>{selectedCity.city}</Text>
+			</TouchableOpacity>
 		</View>
 	);
 };

@@ -1,12 +1,23 @@
 import axios from 'axios';
 
-const openWeatherMapApi = async (location) => {
+const openWeatherMapApi = async () => {
 	try {
 		const response = await axios.get(
-			`https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${process.env.OPEN_WEATHER_MAP_API_KEY}&units=metric`
+			`https://api.openweathermap.org/data/2.5/group?`,
+			{
+				params: {
+					id: "2673722,2643743,524894,1850147,184742",
+					appid: process.env.OPEN_WEATHER_MAP_API_KEY,
+				},
+			}
 		);
+		console.log(response.data);
 		if (response.status === 200) {
-			return response.data;
+			const weather = {
+				temperature: Math.round(response.data.list[0].main.temp),
+			};
+			console.log(weather);
+			return response.data.list;
 		}
 	} catch (ex) {
 		return { success: false, error: ex.message };

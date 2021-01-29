@@ -8,7 +8,6 @@ const openWeatherMapApi = async () => {
 				appid: process.env.OPEN_WEATHER_MAP_API_KEY,
 				units: 'metric',
 				exclude: 'minutely',
-				/* dt: "1586468027", */
 			},
 		});
 		if (response.status === 200) {

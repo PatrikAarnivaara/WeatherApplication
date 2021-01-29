@@ -7,7 +7,7 @@ import DisplayWeather from './DisplayWeather';
 const HomeScreen = ({ navigation }) => {
 	const todaysDate = Date();
 	const [weatherData, setWeatherData] = useState([]);
-	const [selectedCity, setSelectedCity] = useState({ city: '', temp: '' });
+	const [selectedCityCoord, setSelectedCityCoord] = useState({ lat: '', lon: '' });
 	const [weatherDataDisplay, setWeatherDataDisplay] = useState({
 		icon: '',
 		date: '',
@@ -41,10 +41,8 @@ const HomeScreen = ({ navigation }) => {
 			wind: item.wind.speed,
 			humidity: item.main.humidity,
 		});
-		setSelectedCity({
-			...selectedCity,
-			city: item.name,
-		});
+		console.log(item.coord);
+		setSelectedCityCoord({ ...selectedCityCoord, lat: item.coord.lat, lon: item.coord.lon });
 	};
 
 	return (
@@ -64,7 +62,10 @@ const HomeScreen = ({ navigation }) => {
 				/>
 			)}
 			<DisplayWeather weatherDataDisplay={weatherDataDisplay} />
-			<Button title={'Forecast report'} onPress={() => navigation.navigate('Details', selectedCity)}></Button>
+			<Button
+				title={'Forecast report'}
+				onPress={() => navigation.navigate('Details', selectedCityCoord)}
+			></Button>
 		</View>
 	);
 };
@@ -72,6 +73,7 @@ const HomeScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
+		padding: 20,
 		alignItems: 'center',
 		justifyContent: 'center',
 		backgroundColor: '#fff',
@@ -81,7 +83,6 @@ const styles = StyleSheet.create({
 		left: 0,
 		right: 0,
 		top: 0,
-		height: 700,
 	},
 });
 

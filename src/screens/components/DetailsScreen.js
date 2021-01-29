@@ -6,9 +6,8 @@ const DetailsScreen = ({ route, navigation }) => {
 	const { city, temp } = route.params;
 	return (
 		<View style={styles.container}>
-			<Button title="Go to Home" onPress={() => navigation.navigate('Home')} />
-			<Button title="Go back" onPress={() => navigation.goBack()} />
 			<Text>{city}</Text>
+			<Button title="Go back" onPress={() => navigation.goBack()} />
 		</View>
 	);
 };

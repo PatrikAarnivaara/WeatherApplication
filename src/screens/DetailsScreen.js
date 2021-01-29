@@ -49,7 +49,7 @@ const DetailsScreen = ({ route, navigation }) => {
 				<FlatList
 					data={weatherDataOneLocationDays}
 					keyExtractor={(item) => item.temp.day.toString()}
-					renderItem={({ item }) => <Text>{item.temp.day}</Text>}
+					renderItem={({ item }) => <Text>{Math.floor(item.temp.day)}</Text>}
 				/>
 			)}
 		</View>

@@ -15,7 +15,7 @@ const WeatherNow = ({ weatherDataDisplay }) => {
 			</View>
 			<View style={styles.focus}>
 				<Text>Today, {date} </Text>
-				<Text>{temp} °</Text>
+				<Text>{Math.floor(temp)} °</Text>
 				<Text>{description}</Text>
 				<Text>Wind | {wind} km/h</Text>
 				<Text>Hum | {humidity} %</Text>

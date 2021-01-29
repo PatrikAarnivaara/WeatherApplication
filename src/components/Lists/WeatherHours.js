@@ -7,12 +7,12 @@ const WeatherHours = ({ temp, icon, date }) => {
 
 	return (
 		<View /* style={styles.container} */>
-			<Text>{temp}</Text>
+			<Text>{Math.floor(temp)}</Text>
 			<View>
 				{icon !== '' && (
 					<Image
 						source={{ uri: `http://openweathermap.org/img/wn/${icon}@2x.png` }}
-						style={{ width: 30, height: 30 }}
+						style={{ width: 60, height: 60 }}
 					></Image>
 				)}
 				<Text>{localDate.toLocaleString('en-GB', { hour: 'numeric' })}</Text>

@@ -15,7 +15,7 @@ const WeatherHours = ({ temp, icon, date }) => {
 						style={{ width: 30, height: 30 }}
 					></Image>
 				)}
-				<Text>{localDate.toLocaleString('en-US', { hour: 'numeric' })}</Text>
+				<Text>{localDate.toLocaleString('en-GB', { hour: 'numeric' })}</Text>
 			</View>
 		</View>
 	);

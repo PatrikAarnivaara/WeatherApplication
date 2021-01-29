@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { ActivityIndicator, Button, FlatList, StyleSheet, Text, View } from 'react-native';
-import openWeatherMapApiOneLocation from '../../../api/openWeatherMapApiOneLocation';
+import openWeatherMapApiOneLocation from '../../api/openWeatherMapApiOneLocation';
+import WeatherHours from '../components/Lists/WeatherHours';
 
 const DetailsScreen = ({ route, navigation }) => {
 	const { lat, lon } = route.params;
@@ -36,7 +37,7 @@ const DetailsScreen = ({ route, navigation }) => {
 					data={weatherDataOneLocationHours}
 					numColumns={24}
 					keyExtractor={(item) => item.weather[0].id.toString()}
-					renderItem={({ item }) => <Text>{item.temp}, </Text>}
+					renderItem={({ item }) => <WeatherHours temp={item.temp} icon={item.weather[0].icon} />}
 				/>
 			)}
 

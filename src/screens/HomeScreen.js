@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Button, StyleSheet, Text, TouchableOpacity, View, FlatList, ActivityIndicator } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import openWeatherMapApi from '../../../api/openWeatherMapApi';
-import DisplayWeather from './DisplayWeather';
+import openWeatherMapApi from '../../api/openWeatherMapApi';
+import WeatherNow from '../components/WeatherNow';
 
 const HomeScreen = ({ navigation }) => {
-	const todaysDate = Date();
 	const [weatherData, setWeatherData] = useState([]);
 	const [selectedCityCoord, setSelectedCityCoord] = useState({ lat: '', lon: '' });
 	const [weatherDataDisplay, setWeatherDataDisplay] = useState({
@@ -36,12 +35,11 @@ const HomeScreen = ({ navigation }) => {
 			...weatherDataDisplay,
 			icon: item.weather[0].icon,
 			temp: item.main.temp,
-			date: '29 January',
+			date: item.dt,
 			description: item.weather[0].main,
 			wind: item.wind.speed,
 			humidity: item.main.humidity,
 		});
-		console.log(item.coord);
 		setSelectedCityCoord({ ...selectedCityCoord, lat: item.coord.lat, lon: item.coord.lon });
 	};
 
@@ -61,7 +59,7 @@ const HomeScreen = ({ navigation }) => {
 					)}
 				/>
 			)}
-			<DisplayWeather weatherDataDisplay={weatherDataDisplay} />
+			<WeatherNow weatherDataDisplay={weatherDataDisplay} />
 			<Button
 				title={'Forecast report'}
 				onPress={() => navigation.navigate('Details', selectedCityCoord)}

@@ -1,9 +1,8 @@
 import React from 'react';
 import { Text, View, Image, StyleSheet } from 'react-native';
 
-const DisplayWeather = ({ weatherDataDisplay }) => {
+const WeatherNow = ({ weatherDataDisplay }) => {
 	const { icon, date, temp, description, wind, humidity } = weatherDataDisplay;
-
 	return (
 		<View style={styles.container}>
 			<View>
@@ -50,4 +49,4 @@ const styles = StyleSheet.create({
 	},
 });
 
-export default DisplayWeather;
+export default WeatherNow;

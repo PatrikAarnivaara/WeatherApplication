@@ -14,8 +14,8 @@ const DetailsScreen = ({ route, navigation }) => {
 			try {
 				const response = await openWeatherMapApiOneLocation({ lat, lon });
 				console.log(response);
-				setWeatherDataOneLocationDays(response.daily);
-				setWeatherDataOneLocationHours(response.hourly);
+				setWeatherDataOneLocationDays(response.daily.slice(0, 7));
+				setWeatherDataOneLocationHours(response.hourly.slice(0, 24));
 				setLoadingDays(false);
 				setLoadingHours(false);
 			} catch (error) {
@@ -24,8 +24,6 @@ const DetailsScreen = ({ route, navigation }) => {
 		};
 		getWeatherDataOneLocation();
 	}, [setWeatherDataOneLocationDays]);
-
-	console.log(weatherDataOneLocationHours);
 
 	return (
 		<View style={styles.container}>
@@ -36,7 +34,7 @@ const DetailsScreen = ({ route, navigation }) => {
 			) : (
 				<FlatList
 					data={weatherDataOneLocationHours}
-					numColumns={8}
+					numColumns={24}
 					keyExtractor={(item) => item.weather[0].id.toString()}
 					renderItem={({ item }) => <Text>{item.temp}, </Text>}
 				/>

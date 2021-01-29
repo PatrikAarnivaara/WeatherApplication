@@ -1,7 +1,10 @@
 import React from 'react';
 import { Image, StyleSheet, Text, View } from 'react-native';
+import ConvertUTCToLocalDate from '../ConvertUTCToLocalDate';
 
-const WeatherHours = ({ temp, icon }) => {
+const WeatherHours = ({ temp, icon, date }) => {
+	const localDate = ConvertUTCToLocalDate(date);
+
 	return (
 		<View /* style={styles.container} */>
 			<Text>{temp}</Text>
@@ -12,6 +15,7 @@ const WeatherHours = ({ temp, icon }) => {
 						style={{ width: 30, height: 30 }}
 					></Image>
 				)}
+				<Text>{localDate.toLocaleString('en-US', { hour: 'numeric' })}</Text>
 			</View>
 		</View>
 	);
@@ -21,10 +25,10 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		flexDirection: 'row',
-        justifyContent: 'space-between',
-        padding: 5,
-        marginLeft: 5,
-        marginRight: 5
+		justifyContent: 'space-between',
+		padding: 5,
+		marginLeft: 5,
+		marginRight: 5,
 	},
 });
 

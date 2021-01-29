@@ -37,7 +37,9 @@ const DetailsScreen = ({ route, navigation }) => {
 					data={weatherDataOneLocationHours}
 					numColumns={24}
 					keyExtractor={(item) => item.weather[0].id.toString()}
-					renderItem={({ item }) => <WeatherHours temp={item.temp} icon={item.weather[0].icon} />}
+					renderItem={({ item }) => (
+						<WeatherHours temp={item.temp} icon={item.weather[0].icon} date={item.dt} />
+					)}
 				/>
 			)}
 

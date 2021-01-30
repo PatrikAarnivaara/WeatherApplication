@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { ActivityIndicator, Button, FlatList, StyleSheet, Text, View } from 'react-native';
 import openWeatherMapApiOneLocation from '../../api/openWeatherMapApiOneLocation';
 import WeatherHours from '../components/Lists/WeatherHours';
+import WeatherDays from '../components/Lists/WeatherDays';
 
 const DetailsScreen = ({ route, navigation }) => {
 	const { lat, lon } = route.params;
@@ -49,7 +50,9 @@ const DetailsScreen = ({ route, navigation }) => {
 				<FlatList
 					data={weatherDataOneLocationDays}
 					keyExtractor={(item) => item.temp.day.toString()}
-					renderItem={({ item }) => <Text>{Math.floor(item.temp.day)}</Text>}
+					renderItem={({ item }) => (
+						<WeatherDays temp={item.temp.day} icon={item.weather[0].icon} date={item.dt} />
+					)}
 				/>
 			)}
 		</View>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Image, StyleSheet, Text, View } from 'react-native';
-import ConvertUTCToLocalDate from '../ConvertUTCToLocalDate';
+import ConvertUTCToLocalDate from '../../utilities/ConvertUTCToLocalDate';
 
 const WeatherHours = ({ temp, icon, date }) => {
 	const localDate = ConvertUTCToLocalDate(date);

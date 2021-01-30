@@ -9,8 +9,8 @@ const Stack = createStackNavigator();
 const App = () => {
 	return (
 		<NavigationContainer>
-			<Stack.Navigator /* initialRouteName="Home" */>
-				<Stack.Screen name="Home" component={HomeScreen}/*  options={{ title: 'Home' }} */ />
+			<Stack.Navigator headerMode initialRouteName="Home">
+				<Stack.Screen name="Home" component={HomeScreen} options={{ title: 'Home' }} />
 				<Stack.Screen name="Details" component={DetailsScreen} />
 			</Stack.Navigator>
 		</NavigationContainer>

@@ -7,8 +7,8 @@ const WeatherDays = ({ temp, icon, date }) => {
 
 	return (
 		<View style={styles.container}>
-            <Text>{localDate.toLocaleString('en-US', { day: 'numeric' })}</Text>
-			
+			<Text>{localDate.toLocaleString('en-US', { day: 'numeric' })}</Text>
+
 			<View>
 				{icon !== '' && (
 					<Image

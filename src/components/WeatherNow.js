@@ -2,9 +2,10 @@ import React from 'react';
 import { Text, View, Image, StyleSheet } from 'react-native';
 
 const WeatherNow = ({ weatherDataDisplay }) => {
-	const { icon, date, temp, description, wind, humidity } = weatherDataDisplay;
+	const { cityName, icon, date, temp, description, wind, humidity } = weatherDataDisplay;
 	return (
 		<View style={styles.container}>
+			<Text>{cityName}</Text>
 			<View>
 				{icon !== '' && (
 					<Image

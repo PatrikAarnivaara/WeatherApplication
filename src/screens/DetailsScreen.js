@@ -15,7 +15,6 @@ const DetailsScreen = ({ route, navigation }) => {
 		const getWeatherDataOneLocation = async () => {
 			try {
 				const response = await openWeatherMapApiOneLocation({ lat, lon });
-				console.log(response);
 				setWeatherDataOneLocationDays(response.daily.slice(0, 7));
 				setWeatherDataOneLocationHours(response.hourly.slice(0, 24));
 				setLoadingDays(false);

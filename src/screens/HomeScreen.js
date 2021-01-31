@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import RNPickerSelect from "react-native-picker-select";
 import { Button, StyleSheet, Text, TouchableOpacity, View, FlatList, ActivityIndicator } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import openWeatherMapApi from '../../api/openWeatherMapApi';
@@ -16,6 +17,7 @@ const HomeScreen = ({ navigation }) => {
 		humidity: '',
 	});
 	const [isLoading, setLoading] = useState(true);
+	const defaultOption = weatherData[0];
 
 	useEffect(() => {
 		const getWeatherData = async () => {
@@ -30,7 +32,7 @@ const HomeScreen = ({ navigation }) => {
 		getWeatherData();
 	}, [setWeatherData]);
 
-	const presshandler = (item) => {
+	const pressHandler = (item) => {
 		setWeatherDataDisplay({
 			...weatherDataDisplay,
 			icon: item.weather[0].icon,
@@ -46,6 +48,17 @@ const HomeScreen = ({ navigation }) => {
 	return (
 		<View style={styles.container}>
 			<LinearGradient colors={['#47BFDF', '#4A91FF', 192.05]} style={styles.background} />
+			<RNPickerSelect
+                 onValueChange={(value) => console.log(value)}
+                 items={[
+                     { label: "JavaScript", value: "JavaScript" },
+                     { label: "TypeStript", value: "TypeStript" },
+                     { label: "Python", value: "Python" },
+                     { label: "Java", value: "Java" },
+                     { label: "C++", value: "C++" },
+                     { label: "C", value: "C" },
+                 ]}
+             />
 			{isLoading ? (
 				<ActivityIndicator />
 			) : (
@@ -53,7 +66,7 @@ const HomeScreen = ({ navigation }) => {
 					data={weatherData}
 					keyExtractor={(item) => item.id.toString()}
 					renderItem={({ item, index }) => (
-						<TouchableOpacity onPress={() => presshandler(item)}>
+						<TouchableOpacity onPress={() => pressHandler(item)}>
 							<Text>{item.name}</Text>
 						</TouchableOpacity>
 					)}
@@ -81,6 +94,7 @@ const styles = StyleSheet.create({
 		left: 0,
 		right: 0,
 		top: 0,
+		height: 500,
 	},
 });
 

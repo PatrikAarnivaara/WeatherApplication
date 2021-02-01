@@ -6,12 +6,14 @@ const WeatherHours = ({ temp, icon, date }) => {
 	const localDate = ConvertUTCToLocalDate(date);
 
 	return (
-		<View /* style={styles.container} */>
+		<View style={styles.container}>
 			<Text>{Math.floor(temp)}</Text>
 			<View>
 				{icon !== '' && (
 					<Image
-						source={{ uri: `http://openweathermap.org/img/wn/${icon}@2x.png` }}
+						source={{
+							uri: `https://res.cloudinary.com/whatwherewhen/image/upload/f_png,q_auto/v1612195301/weather/${icon}.svg`,
+						}}
 						style={{ width: 60, height: 60 }}
 					></Image>
 				)}
@@ -23,12 +25,10 @@ const WeatherHours = ({ temp, icon, date }) => {
 
 const styles = StyleSheet.create({
 	container: {
-		flex: 1,
 		flexDirection: 'row',
 		justifyContent: 'space-between',
+		top: '10%',
 		padding: 5,
-		marginLeft: 5,
-		marginRight: 5,
 	},
 });
 

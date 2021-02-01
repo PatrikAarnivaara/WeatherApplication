@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { Button, StyleSheet, Text, TouchableOpacity, View, FlatList, ActivityIndicator } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
+import DropDownPicker from 'react-native-dropdown-picker';
 import openWeatherMapApi from '../../api/openWeatherMapApi';
 import WeatherNow from '../components/WeatherNow';
 
 const HomeScreen = ({ navigation }) => {
 	const [weatherData, setWeatherData] = useState([]);
+	const [value, setValue] = useState('');
 	const [selectedCityCoord, setSelectedCityCoord] = useState({ lat: '', lon: '' });
 	const [weatherDataDisplay, setWeatherDataDisplay] = useState({
+		cityName: '',
 		icon: '',
 		date: '',
 		temp: '',
@@ -16,6 +19,8 @@ const HomeScreen = ({ navigation }) => {
 		humidity: '',
 	});
 	const [isLoading, setLoading] = useState(true);
+	const [displayWeatherNow, setDisplayWeatherNow] = useState(false);
+	const defaultOption = weatherData[0];
 
 	useEffect(() => {
 		const getWeatherData = async () => {
@@ -30,9 +35,11 @@ const HomeScreen = ({ navigation }) => {
 		getWeatherData();
 	}, [setWeatherData]);
 
-	const presshandler = (item) => {
+	const displaySelectedCityWeatherInfo = (item) => {
+		setDisplayWeatherNow(true);
 		setWeatherDataDisplay({
 			...weatherDataDisplay,
+			cityName: item.name,
 			icon: item.weather[0].icon,
 			temp: item.main.temp,
 			date: item.dt,
@@ -40,30 +47,40 @@ const HomeScreen = ({ navigation }) => {
 			wind: item.wind.speed,
 			humidity: item.main.humidity,
 		});
-		setSelectedCityCoord({ ...selectedCityCoord, lat: item.coord.lat, lon: item.coord.lon });
+		setSelectedCityCoord({ ...selectedCityCoord, lat: item.coord.lat, lon: item.coord.lon, date: item.dt });
+	};
+
+	const handleSelectedCity = (cityNameSelected) => {
+		const infoDisplay = weatherData.find((item) => item.name === cityNameSelected);
+		displaySelectedCityWeatherInfo(infoDisplay);
 	};
 
 	return (
 		<View style={styles.container}>
-			<LinearGradient colors={['#47BFDF', '#4A91FF', 192.05]} style={styles.background} />
-			{isLoading ? (
-				<ActivityIndicator />
-			) : (
-				<FlatList
-					data={weatherData}
-					keyExtractor={(item) => item.id.toString()}
-					renderItem={({ item, index }) => (
-						<TouchableOpacity onPress={() => presshandler(item)}>
-							<Text>{item.name}</Text>
-						</TouchableOpacity>
-					)}
-				/>
-			)}
-			<WeatherNow weatherDataDisplay={weatherDataDisplay} />
-			<Button
-				title={'Forecast report'}
+			<DropDownPicker
+				items={[
+					{ label: 'Stockholm', value: 'Stockholm' },
+					{ label: 'London', value: 'London' },
+					{ label: 'Moscow', value: 'Moscow' },
+					{ label: 'Tokyo', value: 'Tokyo' },
+					{ label: 'Nairobi', value: 'Nairobi' },
+				]}
+				defaultIndex={0}
+				dropDownMaxHeight={200}
+				placeholder={'Select a city'}
+				labelStyle={{ color: 'black' }}
+				containerStyle={{ height: 40, width: '100%', marginTop: 20 }}
+				onChangeItem={(item) => handleSelectedCity(item.value)}
+			/>
+			<View style={styles.weatherNow}>
+				{displayWeatherNow && <WeatherNow weatherDataDisplay={weatherDataDisplay} />}
+			</View>
+			<TouchableOpacity
+				style={styles.buttonWrapper}
 				onPress={() => navigation.navigate('Details', selectedCityCoord)}
-			></Button>
+			>
+				<Text style={styles.button}>Forecast report</Text>
+			</TouchableOpacity>
 		</View>
 	);
 };
@@ -74,13 +91,32 @@ const styles = StyleSheet.create({
 		padding: 20,
 		alignItems: 'center',
 		justifyContent: 'center',
+		backgroundColor: '#47BFDF',
+	},
+	weatherNow: {
+		flex: 2,
+	},
+	buttonWrapper: {
+		color: '#444E72',
+		borderRadius: 20,
+		width: '60%',
+		borderWidth: 1,
+		borderColor: '#fff',
+		paddingTop: 12,
+		paddingBottom: 12,
+		paddingLeft: 22,
+		paddingRight: 22,
 		backgroundColor: '#fff',
+	},
+	button: {
+		textAlign: 'center',
 	},
 	background: {
 		position: 'absolute',
 		left: 0,
 		right: 0,
 		top: 0,
+		height: 700,
 	},
 });
 

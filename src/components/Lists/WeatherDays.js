@@ -7,12 +7,13 @@ const WeatherDays = ({ temp, icon, date }) => {
 
 	return (
 		<View style={styles.container}>
-            <Text>{localDate.toLocaleString('en-US', { day: 'numeric' })}</Text>
-			
+			<Text>{localDate.toLocaleString('en-US', { day: 'numeric' })}</Text>
 			<View>
 				{icon !== '' && (
 					<Image
-						source={{ uri: `http://openweathermap.org/img/wn/${icon}@2x.png` }}
+						source={{
+							uri: `https://res.cloudinary.com/whatwherewhen/image/upload/f_png,q_auto/v1612195301/weather/${icon}.svg`,
+						}}
 						style={{ width: 60, height: 60 }}
 					></Image>
 				)}
@@ -25,11 +26,9 @@ const WeatherDays = ({ temp, icon, date }) => {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		flexDirection: 'row',
+		flexDirection: 'column',
 		justifyContent: 'space-between',
-		padding: 5,
-		marginLeft: 5,
-		marginRight: 5,
+		top: '40%',
 	},
 });
 

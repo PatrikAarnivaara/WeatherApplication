@@ -13,7 +13,9 @@ const WeatherNow = ({ weatherDataDisplay }) => {
 			<View style={styles.largeIcon}>
 				{icon !== '' && (
 					<Image
-						source={{ uri: `http://openweathermap.org/img/wn/${icon}@2x.png` }}
+						source={{
+							uri: `https://res.cloudinary.com/whatwherewhen/image/upload/f_png,q_auto/v1612195301/weather/${icon}.svg`,
+						}}
 						style={{ width: 150, height: 150 }}
 					></Image>
 				)}
@@ -52,10 +54,10 @@ const styles = StyleSheet.create({
 	icon: {
 		width: 20,
 		height: 20,
-		marginRight: 10
+		marginRight: 10,
 	},
-	largeIcon:{
-		top: '5%'
+	largeIcon: {
+		top: '5%',
 	},
 	focus: {
 		alignItems: 'center',
@@ -67,12 +69,12 @@ const styles = StyleSheet.create({
 		minWidth: '95%',
 		minHeight: '45%',
 		top: '12%',
-		padding: 10
+		padding: 10,
 	},
 	text: {
 		color: '#FFFFFF',
 		fontFamily: 'Overpass_400Regular',
-		marginRight: 10
+		marginRight: 10,
 	},
 	temp: {
 		color: '#FFFFFF',
@@ -85,14 +87,14 @@ const styles = StyleSheet.create({
 		marginBottom: 10,
 		fontFamily: 'Overpass_400Regular',
 	},
-	infoWrapper:{
+	infoWrapper: {
 		alignItems: 'center',
 		justifyContent: 'center',
 	},
 	info: {
 		flexDirection: 'row',
 		justifyContent: 'space-evenly',
-		marginBottom: 10
+		marginBottom: 10,
 	},
 	background: {
 		position: 'absolute',

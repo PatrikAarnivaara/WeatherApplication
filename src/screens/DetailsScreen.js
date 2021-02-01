@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { ActivityIndicator, Button, FlatList, StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, FlatList, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import openWeatherMapApiOneLocation from '../../api/openWeatherMapApiOneLocation';
+import ConvertUTCToLocalDate from '../utilities/ConvertUTCToLocalDate';
 import WeatherHours from '../components/Lists/WeatherHours';
 import WeatherDays from '../components/Lists/WeatherDays';
 
 const DetailsScreen = ({ route, navigation }) => {
-	const { lat, lon } = route.params;
+	const { lat, lon, date } = route.params;
+	const localDate = ConvertUTCToLocalDate(date);
 	const [weatherDataOneLocationDays, setWeatherDataOneLocationDays] = useState([]);
 	const [weatherDataOneLocationHours, setWeatherDataOneLocationHours] = useState([]);
 	const [isLoadingDays, setLoadingDays] = useState(true);
@@ -28,8 +30,14 @@ const DetailsScreen = ({ route, navigation }) => {
 
 	return (
 		<View style={styles.container}>
-			<Button title="Back" onPress={() => navigation.goBack()} />
-			<Text>Today</Text>
+			<TouchableOpacity styles={styles.backButton} onPress={() => navigation.goBack()}>
+				<Text>Back to homepage</Text>
+			</TouchableOpacity>
+			
+			<Text>
+				Today, {localDate.toLocaleString('en-US', { day: 'numeric' })}{' '}
+				{localDate.toLocaleString('en-US', { month: 'long' })}
+			</Text>
 			{isLoadingHours ? (
 				<ActivityIndicator />
 			) : (
@@ -38,10 +46,12 @@ const DetailsScreen = ({ route, navigation }) => {
 					numColumns={24}
 					keyExtractor={(item) => item.weather[0].id.toString()}
 					renderItem={({ item }) => (
-						<WeatherHours temp={item.temp} icon={item.weather[0].icon} date={item.dt} />
+						<WeatherHours styles={styles.horizontalList} temp={item.temp} icon={item.weather[0].icon} date={item.dt} />
 					)}
 				/>
 			)}
+			{/* </View> */}
+			{/* <View styles={styles.verticalList}> */}
 			<Text>Next Forecast</Text>
 			{isLoadingDays ? (
 				<ActivityIndicator />
@@ -50,10 +60,11 @@ const DetailsScreen = ({ route, navigation }) => {
 					data={weatherDataOneLocationDays}
 					keyExtractor={(item) => item.temp.day.toString()}
 					renderItem={({ item }) => (
-						<WeatherDays temp={item.temp.day} icon={item.weather[0].icon} date={item.dt} />
+						<WeatherDays styles={styles.verticalList} temp={item.temp.day} icon={item.weather[0].icon} date={item.dt} />
 					)}
 				/>
 			)}
+			{/* </View> */}
 		</View>
 	);
 };
@@ -61,10 +72,18 @@ const DetailsScreen = ({ route, navigation }) => {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
+		padding: 20,
 		alignItems: 'center',
 		justifyContent: 'center',
 		backgroundColor: '#47BFDF',
+	
 	},
+	backButton: {
+		color: '#444E72',
+		marginBottom: 40
+	},
+	horizontalList: {flex: 2, marginTop: 10, top: '10%'},
+	verticalList: {flex: 2, marginTop: 10},
 });
 
 export default DetailsScreen;

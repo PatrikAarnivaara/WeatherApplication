@@ -12,7 +12,7 @@ const WeatherDays = ({ temp, icon, date }) => {
 				{icon !== '' && (
 					<Image
 						source={{
-							uri: `https://res.cloudinary.com/whatwherewhen/image/upload/v1612170968/weather/${icon}.svg`,
+							uri: `https://res.cloudinary.com/whatwherewhen/image/upload/f_png,q_auto/v1612195301/weather/${icon}.svg`,
 						}}
 						style={{ width: 60, height: 60 }}
 					></Image>
@@ -26,11 +26,9 @@ const WeatherDays = ({ temp, icon, date }) => {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		flexDirection: 'row',
+		flexDirection: 'column',
 		justifyContent: 'space-between',
-		padding: 5,
-		marginLeft: 5,
-		marginRight: 5,
+		top: '40%',
 	},
 });
 

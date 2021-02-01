@@ -58,7 +58,6 @@ const HomeScreen = ({ navigation }) => {
 	return (
 		<View style={styles.container}>
 			<DropDownPicker
-				style={styles.dropdown}
 				items={[
 					{ label: 'Stockholm', value: 'Stockholm' },
 					{ label: 'London', value: 'London' },
@@ -78,7 +77,6 @@ const HomeScreen = ({ navigation }) => {
 			</View>
 			<TouchableOpacity
 				style={styles.buttonWrapper}
-				color="#444E72"
 				onPress={() => navigation.navigate('Details', selectedCityCoord)}
 			>
 				<Text style={styles.button}>Forecast report</Text>
@@ -94,9 +92,6 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		justifyContent: 'center',
 		backgroundColor: '#47BFDF',
-	},
-	dropdown: {
-		opacity: 50,
 	},
 	weatherNow: {
 		flex: 2,

@@ -8,11 +8,12 @@ const WeatherDays = ({ temp, icon, date }) => {
 	return (
 		<View style={styles.container}>
 			<Text>{localDate.toLocaleString('en-US', { day: 'numeric' })}</Text>
-
 			<View>
 				{icon !== '' && (
 					<Image
-						source={require(`../../../assets/weather-icons/${icon}.svg`)}
+						source={{
+							uri: `https://res.cloudinary.com/whatwherewhen/image/upload/v1612170968/weather/${icon}.svg`,
+						}}
 						style={{ width: 60, height: 60 }}
 					></Image>
 				)}

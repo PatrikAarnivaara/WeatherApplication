@@ -28,8 +28,8 @@ const DetailsScreen = ({ route, navigation }) => {
 
 	return (
 		<View style={styles.container}>
-			<Button title="Go back" onPress={() => navigation.goBack()} />
-
+			<Button title="Back" onPress={() => navigation.goBack()} />
+			<Text>Today</Text>
 			{isLoadingHours ? (
 				<ActivityIndicator />
 			) : (
@@ -42,7 +42,7 @@ const DetailsScreen = ({ route, navigation }) => {
 					)}
 				/>
 			)}
-
+			<Text>Next Forecast</Text>
 			{isLoadingDays ? (
 				<ActivityIndicator />
 			) : (
@@ -63,6 +63,7 @@ const styles = StyleSheet.create({
 		flex: 1,
 		alignItems: 'center',
 		justifyContent: 'center',
+		backgroundColor: '#47BFDF',
 	},
 });
 

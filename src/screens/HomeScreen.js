@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, StyleSheet, Text, TouchableOpacity, View, FlatList, ActivityIndicator } from 'react-native';
+import { Button, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import DropDownPicker from 'react-native-dropdown-picker';
 import openWeatherMapApi from '../../api/openWeatherMapApi';
@@ -7,7 +7,7 @@ import WeatherNow from '../components/WeatherNow';
 
 const HomeScreen = ({ navigation }) => {
 	const [weatherData, setWeatherData] = useState([]);
-	const [value, setValue] = useState('Stockholm');
+	const [value, setValue] = useState('');
 	const [selectedCityCoord, setSelectedCityCoord] = useState({ lat: '', lon: '' });
 	const [weatherDataDisplay, setWeatherDataDisplay] = useState({
 		cityName: '',
@@ -19,6 +19,7 @@ const HomeScreen = ({ navigation }) => {
 		humidity: '',
 	});
 	const [isLoading, setLoading] = useState(true);
+	const [displayWeatherNow, setDisplayWeatherNow] = useState(false);
 	const defaultOption = weatherData[0];
 
 	useEffect(() => {
@@ -34,9 +35,8 @@ const HomeScreen = ({ navigation }) => {
 		getWeatherData();
 	}, [setWeatherData]);
 
-	console.log(weatherData);
-
 	const displaySelectedCityWeatherInfo = (item) => {
+		setDisplayWeatherNow(true);
 		setWeatherDataDisplay({
 			...weatherDataDisplay,
 			cityName: item.name,
@@ -58,6 +58,7 @@ const HomeScreen = ({ navigation }) => {
 	return (
 		<View style={styles.container}>
 			<DropDownPicker
+				style={styles.dropdown}
 				items={[
 					{ label: 'Stockholm', value: 'Stockholm' },
 					{ label: 'London', value: 'London' },
@@ -66,15 +67,22 @@ const HomeScreen = ({ navigation }) => {
 					{ label: 'Nairobi', value: 'Nairobi' },
 				]}
 				defaultIndex={0}
+				dropDownMaxHeight={200}
+				placeholder={'Select a city'}
+				labelStyle={{ color: 'black' }}
 				containerStyle={{ height: 40, width: '100%', marginTop: 20 }}
 				onChangeItem={(item) => handleSelectedCity(item.value)}
 			/>
-			<WeatherNow weatherDataDisplay={weatherDataDisplay} />
-			<Text>{value}</Text>
-			<Button
-				title={'Forecast report'}
+			<View style={styles.weatherNow}>
+				{displayWeatherNow && <WeatherNow weatherDataDisplay={weatherDataDisplay} />}
+			</View>
+			<TouchableOpacity
+				style={styles.buttonWrapper}
+				color="#444E72"
 				onPress={() => navigation.navigate('Details', selectedCityCoord)}
-			></Button>
+			>
+				<Text style={styles.button}>Forecast report</Text>
+			</TouchableOpacity>
 		</View>
 	);
 };
@@ -85,7 +93,28 @@ const styles = StyleSheet.create({
 		padding: 20,
 		alignItems: 'center',
 		justifyContent: 'center',
-		/* backgroundColor: '#fff', */
+		backgroundColor: '#47BFDF',
+	},
+	dropdown: {
+		opacity: 50,
+	},
+	weatherNow: {
+		flex: 2,
+	},
+	buttonWrapper: {
+		color: '#444E72',
+		borderRadius: 20,
+		width: '60%',
+		borderWidth: 1,
+		borderColor: '#fff',
+		paddingTop: 12,
+		paddingBottom: 12,
+		paddingLeft: 22,
+		paddingRight: 22,
+		backgroundColor: '#fff',
+	},
+	button: {
+		textAlign: 'center',
 	},
 	background: {
 		position: 'absolute',

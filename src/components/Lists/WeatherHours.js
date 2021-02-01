@@ -11,7 +11,9 @@ const WeatherHours = ({ temp, icon, date }) => {
 			<View>
 				{icon !== '' && (
 					<Image
-						source={require(`../../../assets/weather-icons/${icon}.svg`)}
+						source={{
+							uri: `https://res.cloudinary.com/whatwherewhen/image/upload/v1612170968/weather/${icon}.svg`,
+						}}
 						style={{ width: 60, height: 60 }}
 					></Image>
 				)}

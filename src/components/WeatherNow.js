@@ -14,9 +14,9 @@ const WeatherNow = ({ weatherDataDisplay }) => {
 				{icon !== '' && (
 					<Image
 						source={{
-							uri: `https://res.cloudinary.com/whatwherewhen/image/upload/f_png,q_auto/v1612195301/weather/${icon}.svg`,
+							uri: `https://res.cloudinary.com/whatwherewhen/image/upload/f_png,q_auto:best,e_auto_contrast/v1612195301/weather/${icon}.svg`,
 						}}
-						style={{ width: 150, height: 150 }}
+						style={{ width: 125, height: 125 }}
 					></Image>
 				)}
 			</View>
@@ -68,18 +68,22 @@ const styles = StyleSheet.create({
 		borderRadius: 10,
 		minWidth: '95%',
 		minHeight: '45%',
-		top: '12%',
+		top: '16%',
 		padding: 10,
 	},
 	text: {
 		color: '#FFFFFF',
 		fontFamily: 'Overpass_400Regular',
 		marginRight: 10,
+		fontSize: 16,
 	},
 	temp: {
 		color: '#FFFFFF',
 		fontSize: 100,
 		fontFamily: 'Overpass_400Regular',
+		textShadowOffset: { width: 2, height: 2 },
+		textShadowRadius: 1,
+		textShadowColor: '#000',
 	},
 	description: {
 		color: '#FFFFFF',

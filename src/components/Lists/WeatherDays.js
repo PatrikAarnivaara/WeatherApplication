@@ -12,7 +12,7 @@ const WeatherDays = ({ temp, icon, date }) => {
 				{icon !== '' && (
 					<Image
 						source={{
-							uri: `https://res.cloudinary.com/whatwherewhen/image/upload/f_png,q_auto/v1612195301/weather/${icon}.svg`,
+							uri: `https://res.cloudinary.com/whatwherewhen/image/upload/f_png,q_auto:best,e_auto_contrast/v1612195301/weather/${icon}.svg`,
 						}}
 						style={{ width: 60, height: 60 }}
 					></Image>

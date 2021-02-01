@@ -12,7 +12,7 @@ const WeatherDays = ({ temp, icon, date }) => {
 			<View>
 				{icon !== '' && (
 					<Image
-						source={{ uri: `http://openweathermap.org/img/wn/${icon}@2x.png` }}
+						source={require(`../../../assets/weather-icons/${icon}.svg`)}
 						style={{ width: 60, height: 60 }}
 					></Image>
 				)}

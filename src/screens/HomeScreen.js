@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react';
-/* import RNPickerSelect from 'react-native-picker-select'; */
-import { Picker } from '@react-native-picker/picker';
 import { Button, StyleSheet, Text, TouchableOpacity, View, FlatList, ActivityIndicator } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
+import DropDownPicker from 'react-native-dropdown-picker';
 import openWeatherMapApi from '../../api/openWeatherMapApi';
 import WeatherNow from '../components/WeatherNow';
 
 const HomeScreen = ({ navigation }) => {
 	const [weatherData, setWeatherData] = useState([]);
-	const [value, setValue] = useState('');
+	const [value, setValue] = useState('Stockholm');
 	const [selectedCityCoord, setSelectedCityCoord] = useState({ lat: '', lon: '' });
 	const [weatherDataDisplay, setWeatherDataDisplay] = useState({
 		cityName: '',
@@ -35,6 +34,8 @@ const HomeScreen = ({ navigation }) => {
 		getWeatherData();
 	}, [setWeatherData]);
 
+	console.log(weatherData);
+
 	const displaySelectedCityWeatherInfo = (item) => {
 		setWeatherDataDisplay({
 			...weatherDataDisplay,
@@ -56,20 +57,18 @@ const HomeScreen = ({ navigation }) => {
 
 	return (
 		<View style={styles.container}>
-			{/* <LinearGradient colors={['#47BFDF', '#4A91FF', 192.05]} style={styles.background} /> */}
-			<Picker
-				style={{ width: '100%' }}
-				selectedValue={value}
-				onValueChange={(itemValue) => handleSelectedCity(itemValue)}
-			>
-				{isLoading ? (
-					<Picker.Item label="Loading..." value={0} />
-				) : (
-					weatherData.map((item, index) => {
-						return <Picker.Item label={item.name} value={item.name} key={index} />;
-					})
-				)}
-			</Picker>
+			<DropDownPicker
+				items={[
+					{ label: 'Stockholm', value: 'Stockholm' },
+					{ label: 'London', value: 'London' },
+					{ label: 'Moscow', value: 'Moscow' },
+					{ label: 'Tokyo', value: 'Tokyo' },
+					{ label: 'Nairobi', value: 'Nairobi' },
+				]}
+				defaultIndex={0}
+				containerStyle={{ height: 40, width: '100%', marginTop: 20 }}
+				onChangeItem={(item) => handleSelectedCity(item.value)}
+			/>
 			<WeatherNow weatherDataDisplay={weatherDataDisplay} />
 			<Text>{value}</Text>
 			<Button

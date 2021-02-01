@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View, Image } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import DropDownPicker from 'react-native-dropdown-picker';
 import openWeatherMapApi from '../../api/openWeatherMapApi';
 import WeatherNow from '../components/WeatherNow';
+import pin from '../../assets/pin.png';
 
 const HomeScreen = ({ navigation }) => {
 	const [weatherData, setWeatherData] = useState([]);
@@ -57,29 +58,31 @@ const HomeScreen = ({ navigation }) => {
 
 	return (
 		<View style={styles.container}>
-			<DropDownPicker
-				items={[
-					{ label: 'Stockholm', value: 'Stockholm' },
-					{ label: 'London', value: 'London' },
-					{ label: 'Moscow', value: 'Moscow' },
-					{ label: 'Tokyo', value: 'Tokyo' },
-					{ label: 'Nairobi', value: 'Nairobi' },
-				]}
-				style={{ backgroundColor: 'rgba(255,255,255,0)', borderColor: 'rgba(255,255,255,0)' }}
-				arrowColor="#FFFFFF"
-				defaultIndex={0}
-				dropDownMaxHeight={200}
-				itemStyle={{
-					justifyContent: 'flex-start',
-				}}
-				dropDownStyle={{backgroundColor: 'rgba(255,255,255,0.3)', borderColor: 'rgba(255,255,255,0)'}}
-				placeholder={'Select a city'}
-				arrowStyle={{ marginRight: 210 }}
-				
-				labelStyle={{ color: '#FFFFFF', backgroundColor: 'rgba(255,255,255,0)' }}
-				containerStyle={{ height: 40, width: '100%', marginTop: 20 }}
-				onChangeItem={(item) => handleSelectedCity(item.value)}
-			/>
+			{/* <View style={styles.dropdown}> */}
+				<Image source={pin} style={styles.pin} />
+				<DropDownPicker
+					items={[
+						{ label: 'Stockholm', value: 'Stockholm' },
+						{ label: 'London', value: 'London' },
+						{ label: 'Moscow', value: 'Moscow' },
+						{ label: 'Tokyo', value: 'Tokyo' },
+						{ label: 'Nairobi', value: 'Nairobi' },
+					]}
+					style={{ backgroundColor: 'rgba(255,255,255,0)', borderColor: 'rgba(255,255,255,0)' }}
+					arrowColor="#FFFFFF"
+					defaultIndex={0}
+					dropDownMaxHeight={200}
+					itemStyle={{
+						justifyContent: 'flex-start',
+					}}
+					dropDownStyle={{ backgroundColor: 'rgba(255,255,255,0.3)', borderColor: 'rgba(255,255,255,0)' }}
+					placeholder={'Select a city'}
+					arrowStyle={{ marginRight: 150 }}
+					labelStyle={{ color: '#FFFFFF', backgroundColor: 'rgba(255,255,255,0)' }}
+					containerStyle={{ height: 40, width: '100%' }}
+					onChangeItem={(item) => handleSelectedCity(item.value)}
+				/>
+			{/* </View> */}
 			<View style={styles.weatherNow}>
 				{displayWeatherNow && <WeatherNow weatherDataDisplay={weatherDataDisplay} />}
 			</View>
@@ -100,6 +103,12 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		justifyContent: 'center',
 		backgroundColor: '#47BFDF',
+	},
+	pin: { width: 20, height: 20, marginTop: 10 },
+	dropdown: {
+		flexDirection: 'row',
+		justifyContent: 'space-evenly',
+		marginTop: 10,
 	},
 	weatherNow: {
 		flex: 2,

@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { ActivityIndicator, FlatList, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { ActivityIndicator, FlatList, StyleSheet, Text, View, TouchableOpacity, SafeAreaView } from 'react-native';
 import openWeatherMapApiOneLocation from '../../api/openWeatherMapApiOneLocation';
 import ConvertUTCToLocalDate from '../utilities/ConvertUTCToLocalDate';
 import WeatherHours from '../components/Lists/WeatherHours';
 import WeatherDays from '../components/Lists/WeatherDays';
+import BackButton from '../components/BackButton';
+import Footer from '../components/Footer';
 
 const DetailsScreen = ({ route, navigation }) => {
 	const { lat, lon, date } = route.params;
@@ -30,41 +32,44 @@ const DetailsScreen = ({ route, navigation }) => {
 
 	return (
 		<View style={styles.container}>
-			<TouchableOpacity styles={styles.backButton} onPress={() => navigation.goBack()}>
-				<Text>Back to homepage</Text>
-			</TouchableOpacity>
-			
-			<Text>
-				Today, {localDate.toLocaleString('en-US', { day: 'numeric' })}{' '}
-				{localDate.toLocaleString('en-US', { month: 'long' })}
-			</Text>
-			{isLoadingHours ? (
-				<ActivityIndicator />
-			) : (
-				<FlatList
-					data={weatherDataOneLocationHours}
-					numColumns={24}
-					keyExtractor={(item) => item.weather[0].id.toString()}
-					renderItem={({ item }) => (
-						<WeatherHours styles={styles.horizontalList} temp={item.temp} icon={item.weather[0].icon} date={item.dt} />
+			<View style={styles.content}>
+				<BackButton navigation={navigation} />
+				<Text style={styles.heading}>
+					Today, {localDate.toLocaleString('en-US', { day: 'numeric' })}{' '}
+					{localDate.toLocaleString('en-US', { month: 'long' })}
+				</Text>
+				<View style={styles.listHours}>
+					{isLoadingHours ? (
+						<ActivityIndicator />
+					) : (
+						<FlatList
+							data={weatherDataOneLocationHours}
+							horizontal={true}
+							keyExtractor={(item) => item.dt.toString()}
+							renderItem={({ item }) => (
+								<WeatherHours temp={item.temp} icon={item.weather[0].icon} date={item.dt} />
+							)}
+						/>
 					)}
-				/>
-			)}
-			{/* </View> */}
-			{/* <View styles={styles.verticalList}> */}
-			<Text>Next Forecast</Text>
-			{isLoadingDays ? (
-				<ActivityIndicator />
-			) : (
-				<FlatList
-					data={weatherDataOneLocationDays}
-					keyExtractor={(item) => item.temp.day.toString()}
-					renderItem={({ item }) => (
-						<WeatherDays styles={styles.verticalList} temp={item.temp.day} icon={item.weather[0].icon} date={item.dt} />
+				</View>
+
+				<Text style={styles.heading}>Next Forecast</Text>
+
+				<View style={styles.listDays}>
+					{isLoadingDays ? (
+						<ActivityIndicator />
+					) : (
+						<FlatList
+							data={weatherDataOneLocationDays}
+							keyExtractor={(item) => item.dt.toString()}
+							renderItem={({ item }) => (
+								<WeatherDays temp={item.temp.day} icon={item.weather[0].icon} date={item.dt} />
+							)}
+						/>
 					)}
-				/>
-			)}
-			{/* </View> */}
+				</View>
+			</View>
+			<Footer />
 		</View>
 	);
 };
@@ -72,18 +77,19 @@ const DetailsScreen = ({ route, navigation }) => {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		padding: 20,
-		alignItems: 'center',
-		justifyContent: 'center',
 		backgroundColor: '#47BFDF',
-	
 	},
-	backButton: {
-		color: '#444E72',
-		marginBottom: 40
+	content: {
+		padding: 40,
 	},
-	horizontalList: {flex: 2, marginTop: 10, top: '10%'},
-	verticalList: {flex: 2, marginTop: 10},
+	heading: {
+		color: '#FFFFFF',
+	},
+	listHours: {
+		marginTop: 20,
+		marginBottom: 50,
+	},
+	listDays: {height: 250},
 });
 
 export default DetailsScreen;

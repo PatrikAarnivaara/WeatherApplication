@@ -1,17 +1,32 @@
 import React, { useEffect, useState } from 'react';
-import { Button, StyleSheet, Text, View, FlatList, ActivityIndicator,ScrollView } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View, Image } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
+import DropDownPicker from 'react-native-dropdown-picker';
 import openWeatherMapApi from '../../api/openWeatherMapApi';
+import WeatherNow from '../components/WeatherNow';
+import pin from '../../assets/pin.png';
 
 const HomeScreen = ({ navigation }) => {
 	const [weatherData, setWeatherData] = useState([]);
+	const [selectedCityCoord, setSelectedCityCoord] = useState({ lat: '', lon: '' });
+	const [weatherDataDisplay, setWeatherDataDisplay] = useState({
+		cityName: '',
+		icon: '',
+		date: '',
+		temp: '',
+		description: '',
+		wind: '',
+		humidity: '',
+	});
 	const [isLoading, setLoading] = useState(true);
+	const [displayWeatherNow, setDisplayWeatherNow] = useState(false);
 
 	useEffect(() => {
 		const getWeatherData = async () => {
 			try {
 				const response = await openWeatherMapApi();
 				setWeatherData(response);
+				setLoading(false);
 			} catch (error) {
 				console.log(error);
 			}
@@ -19,28 +34,60 @@ const HomeScreen = ({ navigation }) => {
 		getWeatherData();
 	}, [setWeatherData]);
 
-	console.log(weatherData.map((element) => element.coord.lon));
+	const displaySelectedCityWeatherInfo = (item) => {
+		setDisplayWeatherNow(true);
+		setWeatherDataDisplay({
+			...weatherDataDisplay,
+			cityName: item.name,
+			icon: item.weather[0].icon,
+			temp: item.main.temp,
+			date: item.dt,
+			description: item.weather[0].main,
+			wind: item.wind.speed,
+			humidity: item.main.humidity,
+		});
+		setSelectedCityCoord({ ...selectedCityCoord, lat: item.coord.lat, lon: item.coord.lon, date: item.dt });
+	};
+
+	const handleSelectedCity = (cityNameSelected) => {
+		const infoDisplay = weatherData.find((item) => item.name === cityNameSelected);
+		displaySelectedCityWeatherInfo(infoDisplay);
+	};
 
 	return (
 		<View style={styles.container}>
-			<LinearGradient colors={['#47BFDF', '#4A91FF', 192.05]} style={styles.background} />
-			<Button
-				title={'Go to details'}
-				onPress={() => {
-					/* 1. Navigate to the Details route with params */
-					navigation.navigate('Details', {
-						itemId: 86,
-						otherParam: 'anything you want here',
-					});
+			<Image source={pin} style={styles.pin} />
+			<DropDownPicker
+				items={[
+					{ label: 'Stockholm', value: 'Stockholm' },
+					{ label: 'London', value: 'London' },
+					{ label: 'Moscow', value: 'Moscow' },
+					{ label: 'Tokyo', value: 'Tokyo' },
+					{ label: 'Nairobi', value: 'Nairobi' },
+				]}
+				style={{ backgroundColor: 'rgba(255,255,255,0)', borderColor: 'rgba(255,255,255,0)' }}
+				arrowColor="#FFFFFF"
+				defaultIndex={0}
+				dropDownMaxHeight={100}
+				itemStyle={{
+					justifyContent: 'flex-start',
 				}}
+				dropDownStyle={{ backgroundColor: 'rgba(255,255,255,0.3)', borderColor: 'rgba(255,255,255,0)' }}
+				placeholder={'Select a city'}
+				arrowStyle={{ marginRight: 150 }}
+				labelStyle={{ color: '#FFFFFF', backgroundColor: 'rgba(255,255,255,0)', fontSize: 20 }}
+				containerStyle={{ height: 40, width: '100%' }}
+				onChangeItem={(item) => handleSelectedCity(item.value)}
 			/>
-			<ScrollView>
-				{weatherData.map((item) => (
-					<View key={item.id}>
-						<Text>{item.main.temp}  °C,{item.name}</Text>
-					</View>
-				))}
-			</ScrollView>
+			<View style={styles.weatherNow}>
+				{displayWeatherNow && <WeatherNow weatherDataDisplay={weatherDataDisplay} />}
+			</View>
+			<TouchableOpacity
+				style={styles.buttonWrapper}
+				onPress={() => navigation.navigate('Details', selectedCityCoord)}
+			>
+				<Text style={styles.button}>Forecast report</Text>
+			</TouchableOpacity>
 		</View>
 	);
 };
@@ -48,9 +95,34 @@ const HomeScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
+		padding: 20,
 		alignItems: 'center',
 		justifyContent: 'center',
+		backgroundColor: '#47BFDF',
+	},
+	pin: { width: 20, height: 20, marginTop: 10 },
+	dropdown: {
+		flexDirection: 'row',
+		justifyContent: 'space-evenly',
+		marginTop: 10,
+	},
+	weatherNow: {
+		flex: 2,
+	},
+	buttonWrapper: {
+		borderRadius: 20,
+		width: '60%',
+		borderWidth: 1,
+		borderColor: '#fff',
+		paddingTop: 12,
+		paddingBottom: 12,
+		paddingLeft: 20,
+		paddingRight: 20,
 		backgroundColor: '#fff',
+	},
+	button: {
+		textAlign: 'center',
+		color: '#444E72',
 	},
 	background: {
 		position: 'absolute',

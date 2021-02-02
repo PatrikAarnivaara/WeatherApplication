@@ -8,7 +8,6 @@ import pin from '../../assets/pin.png';
 
 const HomeScreen = ({ navigation }) => {
 	const [weatherData, setWeatherData] = useState([]);
-	/* const [value, setValue] = useState(''); */
 	const [selectedCityCoord, setSelectedCityCoord] = useState({ lat: '', lon: '' });
 	const [weatherDataDisplay, setWeatherDataDisplay] = useState({
 		cityName: '',
@@ -21,7 +20,6 @@ const HomeScreen = ({ navigation }) => {
 	});
 	const [isLoading, setLoading] = useState(true);
 	const [displayWeatherNow, setDisplayWeatherNow] = useState(false);
-	/* const defaultOption = weatherData[0]; */
 
 	useEffect(() => {
 		const getWeatherData = async () => {
@@ -70,14 +68,14 @@ const HomeScreen = ({ navigation }) => {
 				style={{ backgroundColor: 'rgba(255,255,255,0)', borderColor: 'rgba(255,255,255,0)' }}
 				arrowColor="#FFFFFF"
 				defaultIndex={0}
-				dropDownMaxHeight={200}
+				dropDownMaxHeight={100}
 				itemStyle={{
 					justifyContent: 'flex-start',
 				}}
 				dropDownStyle={{ backgroundColor: 'rgba(255,255,255,0.3)', borderColor: 'rgba(255,255,255,0)' }}
 				placeholder={'Select a city'}
 				arrowStyle={{ marginRight: 150 }}
-				labelStyle={{ color: '#FFFFFF', backgroundColor: 'rgba(255,255,255,0)' }}
+				labelStyle={{ color: '#FFFFFF', backgroundColor: 'rgba(255,255,255,0)', fontSize: 20 }}
 				containerStyle={{ height: 40, width: '100%' }}
 				onChangeItem={(item) => handleSelectedCity(item.value)}
 			/>

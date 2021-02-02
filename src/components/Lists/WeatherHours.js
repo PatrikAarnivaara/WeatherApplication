@@ -7,8 +7,8 @@ const WeatherHours = ({ temp, icon, date }) => {
 
 	return (
 		<View>
-			<View style={styles.content}>
-				<View style={styles.forecast}>
+			<View style={styles.container}>
+				<View style={styles.content}>
 					<View>
 						<Text style={styles.text}>{Math.floor(temp)}°</Text>
 					</View>
@@ -32,11 +32,11 @@ const WeatherHours = ({ temp, icon, date }) => {
 };
 
 const styles = StyleSheet.create({
-	content: {
+	container: {
 		flexDirection: 'row',
 		justifyContent: 'space-between',
 	},
-	forecast: {
+	content: {
 		flexDirection: 'column',
 		alignItems: 'center',
 		marginRight: 16,

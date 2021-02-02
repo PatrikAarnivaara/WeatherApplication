@@ -16,7 +16,7 @@ const WeatherNow = ({ weatherDataDisplay }) => {
 						source={{
 							uri: `https://res.cloudinary.com/whatwherewhen/image/upload/f_png,q_auto:best,e_auto_contrast/v1612195301/weather/${icon}.svg`,
 						}}
-						style={{ width: 125, height: 125 }}
+						style={{ width: 120, height: 120 }}
 					></Image>
 				)}
 			</View>
@@ -27,18 +27,37 @@ const WeatherNow = ({ weatherDataDisplay }) => {
 				</Text>
 				<Text style={styles.temp}>{Math.floor(temp)}°</Text>
 				<Text style={styles.description}>{description}</Text>
-				<View style={styles.infoWrapper}>
-					<View style={styles.info}>
-						<Image source={windIcon} style={styles.icon} />
-						<Text style={styles.text}>Wind</Text>
-						<Text style={styles.text}>|</Text>
-						<Text style={styles.text}>{wind}km/h</Text>
+				<View style={styles.windHumWrapper}>
+					<View style={styles.windHumContent}>
+						<View>
+							<Image source={windIcon} />
+						</View>
+						<View>
+							<Text style={styles.text}>Wind</Text>
+						</View>
+						<View>
+							<Text style={styles.text}>|</Text>
+						</View>
+						<View>
+							<Text style={styles.text}>{Math.floor(wind)} km/h</Text>
+						</View>
 					</View>
-					<View style={styles.info}>
-						<Image source={humidityIcon} style={styles.icon} />
-						<Text style={styles.text}>Hum</Text>
-						<Text style={styles.text}>|</Text>
-						<Text style={styles.text}>{humidity}%</Text>
+				</View>
+
+				<View style={styles.windHumWrapper}>
+					<View style={styles.windHumContent}>
+						<View>
+							<Image source={humidityIcon} />
+						</View>
+						<View>
+							<Text style={styles.text}>Hum</Text>
+						</View>
+						<View>
+							<Text style={styles.text}>|</Text>
+						</View>
+						<View>
+							<Text style={styles.text}>{humidity}%</Text>
+						</View>
 					</View>
 				</View>
 			</View>
@@ -51,13 +70,8 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		justifyContent: 'center',
 	},
-	icon: {
-		width: 20,
-		height: 20,
-		marginRight: 10,
-	},
 	largeIcon: {
-		top: '5%',
+		top: '10%',
 	},
 	focus: {
 		alignItems: 'center',
@@ -67,19 +81,18 @@ const styles = StyleSheet.create({
 		borderColor: '#FFFFFF',
 		borderRadius: 10,
 		minWidth: '95%',
-		minHeight: '45%',
-		top: '16%',
+		minHeight: '40%',
+		top: '25%',
 		padding: 10,
 	},
 	text: {
 		color: '#FFFFFF',
 		fontFamily: 'Overpass_400Regular',
-		marginRight: 10,
 		fontSize: 16,
 	},
 	temp: {
 		color: '#FFFFFF',
-		fontSize: 100,
+		fontSize: 80,
 		fontFamily: 'Overpass_400Regular',
 		textShadowOffset: { width: 2, height: 2 },
 		textShadowRadius: 1,
@@ -87,18 +100,20 @@ const styles = StyleSheet.create({
 	},
 	description: {
 		color: '#FFFFFF',
-		fontSize: 24,
-		marginBottom: 10,
+		fontSize: 20,
+		marginBottom: 16,
 		fontFamily: 'Overpass_400Regular',
 	},
-	infoWrapper: {
-		alignItems: 'center',
-		justifyContent: 'center',
+	windHumWrapper: {
+		flexDirection: 'column',
+		justifyContent: 'space-between',
 	},
-	info: {
+	windHumContent: {
 		flexDirection: 'row',
-		justifyContent: 'space-evenly',
-		marginBottom: 10,
+		justifyContent: 'space-between',
+		alignItems: 'center',
+		marginBottom: 12,
+		width: 150,
 	},
 	background: {
 		position: 'absolute',

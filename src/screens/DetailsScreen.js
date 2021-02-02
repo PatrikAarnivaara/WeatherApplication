@@ -4,8 +4,8 @@ import openWeatherMapApiOneLocation from '../../api/openWeatherMapApiOneLocation
 import ConvertUTCToLocalDate from '../utilities/ConvertUTCToLocalDate';
 import WeatherHours from '../components/Lists/WeatherHours';
 import WeatherDays from '../components/Lists/WeatherDays';
-import BackButton from '../components/BackButton';
-import Footer from '../components/Footer';
+import BackButton from '../components/UI/BackButton';
+import Footer from '../components/UI/Footer';
 
 const DetailsScreen = ({ route, navigation }) => {
 	const { lat, lon, date } = route.params;

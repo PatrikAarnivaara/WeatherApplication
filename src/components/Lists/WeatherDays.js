@@ -6,8 +6,8 @@ const WeatherDays = ({ temp, icon, date }) => {
 	const localDate = ConvertUTCToLocalDate(date);
 
 	return (
-		<View style={styles.content}>
-			<View style={styles.forecast}>
+		<View style={styles.container}>
+			<View style={styles.content}>
 				<View>
 					<Text style={styles.text}>
 						{localDate.toLocaleString('en-US', { month: 'long' }).substr(0, 3)}.{' '}
@@ -33,8 +33,8 @@ const WeatherDays = ({ temp, icon, date }) => {
 };
 
 const styles = StyleSheet.create({
-	content: { flex: 1, flexDirection: 'column', justifyContent: 'space-between' },
-	forecast: {
+	container: { flex: 1, flexDirection: 'column', justifyContent: 'space-between' },
+	content: {
 		flexDirection: 'row',
 		justifyContent: 'space-between',
 		alignItems: 'center',

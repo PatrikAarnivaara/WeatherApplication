@@ -6,7 +6,7 @@ const WeatherDays = ({ temp, icon, date }) => {
 	const localDate = ConvertUTCToLocalDate(date);
 
 	return (
-		<View style={styles.container}>
+		<View /* style={styles.container} */>
 			<Text>{localDate.toLocaleString('en-US', { day: 'numeric' })}</Text>
 			<View>
 				{icon !== '' && (

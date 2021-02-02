@@ -6,7 +6,7 @@ const WeatherHours = ({ temp, icon, date }) => {
 	const localDate = ConvertUTCToLocalDate(date);
  
 	return (
-		<View style={styles.container}>
+		<View /* style={styles.container} */>
 			<Text>{Math.floor(temp)}</Text>
 			<View>
 				{icon !== '' && (

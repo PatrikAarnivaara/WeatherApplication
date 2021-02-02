@@ -8,7 +8,7 @@ import pin from '../../assets/pin.png';
 
 const HomeScreen = ({ navigation }) => {
 	const [weatherData, setWeatherData] = useState([]);
-	const [value, setValue] = useState('');
+	/* const [value, setValue] = useState(''); */
 	const [selectedCityCoord, setSelectedCityCoord] = useState({ lat: '', lon: '' });
 	const [weatherDataDisplay, setWeatherDataDisplay] = useState({
 		cityName: '',
@@ -21,7 +21,7 @@ const HomeScreen = ({ navigation }) => {
 	});
 	const [isLoading, setLoading] = useState(true);
 	const [displayWeatherNow, setDisplayWeatherNow] = useState(false);
-	const defaultOption = weatherData[0];
+	/* const defaultOption = weatherData[0]; */
 
 	useEffect(() => {
 		const getWeatherData = async () => {
@@ -58,7 +58,6 @@ const HomeScreen = ({ navigation }) => {
 
 	return (
 		<View style={styles.container}>
-			{/* <View style={styles.dropdown}> */}
 			<Image source={pin} style={styles.pin} />
 			<DropDownPicker
 				items={[
@@ -82,7 +81,6 @@ const HomeScreen = ({ navigation }) => {
 				containerStyle={{ height: 40, width: '100%' }}
 				onChangeItem={(item) => handleSelectedCity(item.value)}
 			/>
-			{/* </View> */}
 			<View style={styles.weatherNow}>
 				{displayWeatherNow && <WeatherNow weatherDataDisplay={weatherDataDisplay} />}
 			</View>

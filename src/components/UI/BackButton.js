@@ -14,11 +14,11 @@ const BackButton = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-	content: { flexDirection: 'row', alignItems: 'center', marginBottom: 20 },
+	content: { flexDirection: 'row', alignItems: 'center', marginBottom: 30 },
 	backButton: {
 		marginLeft: 10,
 		color: '#FFFFFF',
-		fontFamily: 'Overpass_Regular',
+		fontFamily: 'Overpass_400Regular',
 		fontSize: 20,
 	},
 });

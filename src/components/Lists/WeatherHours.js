@@ -14,7 +14,7 @@ const WeatherHours = ({ temp, icon, date }) => {
 						source={{
 							uri: `https://res.cloudinary.com/whatwherewhen/image/upload/f_png,q_auto:best,e_auto_contrast/v1612195301/weather/${icon}.svg`,
 						}}
-						style={{ width: 60, height: 60 }}
+						style={{ width: 40, height: 40 }}
 					></Image>
 				)}
 				<Text style={styles.text}>{localDate.toLocaleString('en-GB', { hour: 'numeric' })}</Text>

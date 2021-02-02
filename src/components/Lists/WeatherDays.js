@@ -10,7 +10,7 @@ const WeatherDays = ({ temp, icon, date }) => {
 			<View style={styles.forecast}>
 				<View>
 					<Text style={styles.text}>
-						{localDate.toLocaleString('en-US', { month: 'long' }).substr(0, 3)}{' '}
+						{localDate.toLocaleString('en-US', { month: 'long' }).substr(0, 3)}.{' '}
 						{localDate.toLocaleString('en-GB', { hour: 'numeric' })}
 					</Text>
 				</View>
@@ -20,7 +20,7 @@ const WeatherDays = ({ temp, icon, date }) => {
 							source={{
 								uri: `https://res.cloudinary.com/whatwherewhen/image/upload/f_png,q_auto:best,e_auto_contrast/v1612195301/weather/${icon}.svg`,
 							}}
-							style={{ width: 60, height: 60 }}
+							style={{ width: 40, height: 40 }}
 						></Image>
 					)}
 				</View>
@@ -33,11 +33,12 @@ const WeatherDays = ({ temp, icon, date }) => {
 };
 
 const styles = StyleSheet.create({
-	content: { alignItems: 'center', justifyContent: 'center', marginBottom: 16 },
+	content: { flex: 1, flexDirection: 'column', justifyContent: 'space-between' },
 	forecast: {
 		flexDirection: 'row',
+		justifyContent: 'space-between',
 		alignItems: 'center',
-		marginBottom: 10,
+		marginBottom: 12
 	},
 	text: {
 		color: '#FFFFFF',

@@ -85,6 +85,7 @@ const styles = StyleSheet.create({
 	heading: {
 		color: '#FFFFFF',
 		fontSize: 18,
+		marginBottom: 10
 	},
 	listHours: {
 		marginTop: 20,
@@ -92,7 +93,7 @@ const styles = StyleSheet.create({
 	},
 	listDays: {
 		marginTop: 20,
-		height: 250,
+		height: 240,
 	},
 });
 

@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
 		textAlign: 'center',
 		color: '#FFFFFF',
 		fontFamily: 'Overpass_400Regular',
-		fontSize: 16,
+        fontSize: 16,
 	},
 });
 

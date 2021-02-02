@@ -29,7 +29,7 @@ const WeatherNow = ({ weatherDataDisplay }) => {
 				<Text style={styles.description}>{description}</Text>
 				<View style={styles.windHumWrapper}>
 					<View style={styles.windHumContent}>
-						<View>
+						<View style={styles.windyIcon}>
 							<Image source={windIcon} />
 						</View>
 						<View>
@@ -108,12 +108,15 @@ const styles = StyleSheet.create({
 		flexDirection: 'column',
 		justifyContent: 'space-between',
 	},
+	windyIcon: {
+		marginRight: 8
+	},
 	windHumContent: {
 		flexDirection: 'row',
 		justifyContent: 'space-between',
 		alignItems: 'center',
 		marginBottom: 12,
-		width: 150,
+		width: 180,
 	},
 	background: {
 		position: 'absolute',

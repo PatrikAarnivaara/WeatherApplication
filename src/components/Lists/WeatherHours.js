@@ -10,7 +10,7 @@ const WeatherHours = ({ temp, icon, date }) => {
 			<View style={styles.container}>
 				<View style={styles.content}>
 					<View>
-						<Text style={styles.text}>{Math.floor(temp)}°</Text>
+						<Text style={styles.textTemp}>{Math.floor(temp)}°</Text>
 					</View>
 					<View>
 						{icon !== '' && (
@@ -23,7 +23,7 @@ const WeatherHours = ({ temp, icon, date }) => {
 						)}
 					</View>
 					<View>
-						<Text style={styles.text}>{localDate.toLocaleString('en-GB', { hour: 'numeric' })}</Text>
+						<Text style={styles.textHour}>{localDate.toLocaleString('en-GB', { hour: 'numeric' })}</Text>
 					</View>
 				</View>
 			</View>
@@ -41,10 +41,16 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		marginRight: 16,
 	},
-	text: {
+	textTemp: {
 		color: '#FFFFFF',
 		fontFamily: 'Overpass_400Regular',
+		marginBottom: 14
 	},
+	textHour: {
+		color: '#FFFFFF',
+		fontFamily: 'Overpass_400Regular',
+		marginTop: 14
+	}
 });
 
 export default WeatherHours;

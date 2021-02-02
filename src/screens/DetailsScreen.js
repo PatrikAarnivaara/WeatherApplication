@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
 	},
 	listHours: {
 		marginTop: 20,
-		marginBottom: 50,
+		marginBottom: 40,
 	},
 	listDays: {
 		marginTop: 20,

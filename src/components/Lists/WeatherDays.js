@@ -11,7 +11,7 @@ const WeatherDays = ({ temp, icon, date }) => {
 				<View>
 					<Text style={styles.text}>
 						{localDate.toLocaleString('en-US', { month: 'long' }).substr(0, 3)}.{' '}
-						{localDate.toLocaleString('en-GB', { hour: 'numeric' })}
+						{localDate.toLocaleString("en-US", {day: "numeric"})}
 					</Text>
 				</View>
 				<View>

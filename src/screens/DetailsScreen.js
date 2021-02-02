@@ -34,10 +34,13 @@ const DetailsScreen = ({ route, navigation }) => {
 		<View style={styles.container}>
 			<View style={styles.content}>
 				<BackButton navigation={navigation} />
-				<Text style={styles.heading}>
-					Today {localDate.toLocaleString('en-US', { month: 'long' }).substr(0, 3)},
-					{localDate.toLocaleString('en-US', { day: 'numeric' })}
-				</Text>
+				<View style={styles.headingHoursWrapper}>
+					<Text style={styles.headingHoursContent}>Today</Text>
+					<Text style={styles.headingHoursContent}>
+						{localDate.toLocaleString('en-US', { month: 'long' }).substr(0, 3)},{' '}
+						{localDate.toLocaleString('en-US', { day: 'numeric' })}
+					</Text>
+				</View>
 				<View style={styles.listHours}>
 					{isLoadingHours ? (
 						<ActivityIndicator />
@@ -85,7 +88,17 @@ const styles = StyleSheet.create({
 	heading: {
 		color: '#FFFFFF',
 		fontSize: 18,
-		marginBottom: 10
+		marginBottom: 5,
+	},
+	headingHoursWrapper: {
+		flexDirection: 'row',
+		alignItems: 'baseline',
+		justifyContent: 'space-between',
+		marginBottom: 5,
+	},
+	headingHoursContent: {
+		color: '#FFFFFF',
+		fontSize: 18,
 	},
 	listHours: {
 		marginTop: 20,

@@ -69,7 +69,7 @@ const HomeScreen = ({ navigation }) => {
 				style={{ backgroundColor: 'rgba(255,255,255,0)', borderColor: 'rgba(255,255,255,0)' }}
 				arrowColor="#FFFFFF"
 				defaultIndex={0}
-				dropDownMaxHeight={100}
+				dropDownMaxHeight={120}
 				itemStyle={{
 					justifyContent: 'flex-start',
 				}}

@@ -30,13 +30,13 @@ const WeatherNow = ({ weatherDataDisplay }) => {
 				<View style={styles.windHumWrapper}>
 					<View style={styles.windHumContent}>
 						<View style={styles.windyIcon}>
-							<Image source={windIcon} />
+							<Image source={windIcon} style={{ width: 20, height: 20 }} />
 						</View>
 						<View>
 							<Text style={styles.text}>Wind</Text>
 						</View>
 						<View>
-							<Text style={styles.line}>|</Text>
+							<Text style={styles.text}>|</Text>
 						</View>
 						<View>
 							<Text style={styles.text}>{Math.floor(wind)} km/h</Text>
@@ -47,10 +47,10 @@ const WeatherNow = ({ weatherDataDisplay }) => {
 				<View style={styles.windHumWrapper}>
 					<View style={styles.windHumContent}>
 						<View>
-							<Image source={humidityIcon} />
+							<Image source={humidityIcon} style={{ width: 18, height: 22, marginRight: 2 }} />
 						</View>
 						<View>
-							<Text style={styles.text}>Hum</Text>
+							<Text style={styles.text}>Humi</Text>
 						</View>
 						<View>
 							<Text style={styles.line}>|</Text>
@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
 		justifyContent: 'space-between',
 	},
 	windyIcon: {
-		marginRight: 8
+		marginRight: 0,
 	},
 	windHumContent: {
 		flexDirection: 'row',
@@ -122,6 +122,7 @@ const styles = StyleSheet.create({
 		color: '#FFFFFF',
 		fontFamily: 'Overpass_400Regular',
 		fontSize: 16,
+		marginRight: 14,
 	},
 	background: {
 		position: 'absolute',

@@ -8,16 +8,24 @@ const WeatherHours = ({ temp, icon, date }) => {
 	return (
 		<View>
 			<View style={styles.content}>
-				<Text style={styles.text}>{Math.floor(temp)}°</Text>
-				{icon !== '' && (
-					<Image
-						source={{
-							uri: `https://res.cloudinary.com/whatwherewhen/image/upload/f_png,q_auto:best,e_auto_contrast/v1612195301/weather/${icon}.svg`,
-						}}
-						style={{ width: 40, height: 40 }}
-					></Image>
-				)}
-				<Text style={styles.text}>{localDate.toLocaleString('en-GB', { hour: 'numeric' })}</Text>
+				<View style={styles.forecast}>
+					<View>
+						<Text style={styles.text}>{Math.floor(temp)}°</Text>
+					</View>
+					<View>
+						{icon !== '' && (
+							<Image
+								source={{
+									uri: `https://res.cloudinary.com/whatwherewhen/image/upload/f_png,q_auto:best,e_auto_contrast/v1612195301/weather/${icon}.svg`,
+								}}
+								style={{ width: 40, height: 40 }}
+							></Image>
+						)}
+					</View>
+					<View>
+						<Text style={styles.text}>{localDate.toLocaleString('en-GB', { hour: 'numeric' })}</Text>
+					</View>
+				</View>
 			</View>
 		</View>
 	);
@@ -25,8 +33,13 @@ const WeatherHours = ({ temp, icon, date }) => {
 
 const styles = StyleSheet.create({
 	content: {
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+	},
+	forecast: {
+		flexDirection: 'column',
 		alignItems: 'center',
-		marginRight: 10,
+		marginRight: 16,
 	},
 	text: {
 		color: '#FFFFFF',

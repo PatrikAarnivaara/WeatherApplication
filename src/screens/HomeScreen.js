@@ -8,6 +8,7 @@ import pin from '../../assets/pin.png';
 
 const HomeScreen = ({ navigation }) => {
 	const [weatherData, setWeatherData] = useState([]);
+	const [value, setValue] = useState('');
 	const [selectedCityCoord, setSelectedCityCoord] = useState({ lat: '', lon: '' });
 	const [weatherDataDisplay, setWeatherDataDisplay] = useState({
 		cityName: '',

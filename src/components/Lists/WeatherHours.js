@@ -4,11 +4,11 @@ import ConvertUTCToLocalDate from '../../utilities/ConvertUTCToLocalDate';
 
 const WeatherHours = ({ temp, icon, date }) => {
 	const localDate = ConvertUTCToLocalDate(date);
- 
+
 	return (
-		<View /* style={styles.container} */>
-			<Text>{Math.floor(temp)}</Text>
-			<View>
+		<View>
+			<View style={styles.content}>
+				<Text style={styles.text}>{Math.floor(temp)}°</Text>
 				{icon !== '' && (
 					<Image
 						source={{
@@ -17,18 +17,20 @@ const WeatherHours = ({ temp, icon, date }) => {
 						style={{ width: 60, height: 60 }}
 					></Image>
 				)}
-				<Text>{localDate.toLocaleString('en-GB', { hour: 'numeric' })}</Text>
+				<Text style={styles.text}>{localDate.toLocaleString('en-GB', { hour: 'numeric' })}</Text>
 			</View>
 		</View>
 	);
 };
 
 const styles = StyleSheet.create({
-	container: {
-		flexDirection: 'row',
-		justifyContent: 'space-between',
-		top: '10%',
-		padding: 5,
+	content: {
+		alignItems: 'center',
+		marginRight: 10,
+	},
+	text: {
+		color: '#FFFFFF',
+		fontFamily: 'Overpass_400Regular',
 	},
 });
 

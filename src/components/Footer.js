@@ -11,10 +11,10 @@ const Footer = () => {
 
 const styles = StyleSheet.create({
 	footer: {
+		textAlign: 'center',
 		color: '#FFFFFF',
 		fontFamily: 'Overpass_400Regular',
-        fontSize: 20,
-        padding: 20
+		fontSize: 16,
 	},
 });
 

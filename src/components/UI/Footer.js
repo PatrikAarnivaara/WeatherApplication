@@ -15,6 +15,7 @@ const styles = StyleSheet.create({
 	container: {
 		flexDirection: 'row',
 		justifyContent: 'center',
+		marginTop: 20
 	},
 	footer: {
 		color: '#FFFFFF',

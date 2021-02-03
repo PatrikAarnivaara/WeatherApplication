@@ -57,6 +57,7 @@ const HomeScreen = ({ navigation }) => {
 
 	return (
 		<View style={styles.container}>
+			{/* <View> */}
 			<Image source={pin} style={styles.pin} />
 			<DropDownPicker
 				items={[
@@ -89,6 +90,7 @@ const HomeScreen = ({ navigation }) => {
 			>
 				<Text style={styles.button}>Forecast report</Text>
 			</TouchableOpacity>
+		{/* 	</View> */}
 		</View>
 	);
 };
@@ -100,6 +102,9 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		justifyContent: 'center',
 		backgroundColor: '#47BFDF',
+	},
+	content: {
+		padding: 40,
 	},
 	pin: { width: 20, height: 20, marginTop: 10 },
 	dropdown: {

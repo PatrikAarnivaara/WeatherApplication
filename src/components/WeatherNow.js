@@ -39,7 +39,7 @@ const WeatherNow = ({ weatherDataDisplay }) => {
 							<Text style={styles.text}>|</Text>
 						</View>
 						<View>
-							<Text style={styles.text}>{Math.floor(wind)} km/h</Text>
+							<Text style={styles.text}>{Math.floor(wind)} m/s</Text>
 						</View>
 					</View>
 				</View>
@@ -50,13 +50,13 @@ const WeatherNow = ({ weatherDataDisplay }) => {
 							<Image source={humidityIcon} style={{ width: 18, height: 22, marginRight: 2 }} />
 						</View>
 						<View>
-							<Text style={styles.text}>Humi</Text>
+							<Text style={styles.text}>Hum</Text>
 						</View>
 						<View>
 							<Text style={styles.line}>|</Text>
 						</View>
 						<View>
-							<Text style={styles.text}>{humidity}%</Text>
+							<Text style={styles.text}>{humidity} %</Text>
 						</View>
 					</View>
 				</View>
@@ -122,7 +122,7 @@ const styles = StyleSheet.create({
 		color: '#FFFFFF',
 		fontFamily: 'Overpass_400Regular',
 		fontSize: 16,
-		marginRight: 14,
+		
 	},
 	background: {
 		position: 'absolute',

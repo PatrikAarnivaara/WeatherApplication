@@ -14,7 +14,6 @@ Weather application made with React Native
 
 ## Upcoming improvements
 * Make application responsive to different mobile screen sizes and Android
-* Make items list dynamic
 * Pre-selected city on start
 
 ## Setup

@@ -71,9 +71,9 @@ const HomeScreen = ({ navigation }) => {
 					style={{
 						backgroundColor: 'rgba(255,255,255,0)',
 						borderColor: 'rgba(255,255,255,0)',
-						...(Platform.OS !== 'android' && {
+						/* ...(Platform.OS !== 'android' && {
 							zIndex: 10,
-						}),
+						}), */
 					}}
 					arrowColor="#FFFFFF"
 					defaultIndex={0}

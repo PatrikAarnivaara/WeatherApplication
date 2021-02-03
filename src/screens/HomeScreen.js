@@ -57,31 +57,36 @@ const HomeScreen = ({ navigation }) => {
 
 	return (
 		<View style={styles.container}>
-			{/* TODO: Improve css to fit different screens and align pin with dropdown */}
-			<Image source={pin} style={styles.pin} />
-			{/* TODO: Make this list dynamic */}
-			<DropDownPicker
-				items={[
-					{ label: 'Stockholm', value: 'Stockholm' },
-					{ label: 'London', value: 'London' },
-					{ label: 'Moscow', value: 'Moscow' },
-					{ label: 'Tokyo', value: 'Tokyo' },
-					{ label: 'Nairobi', value: 'Nairobi' },
-				]}
-				style={{ backgroundColor: 'rgba(255,255,255,0)', borderColor: 'rgba(255,255,255,0)' }}
-				arrowColor="#FFFFFF"
-				defaultIndex={0}
-				dropDownMaxHeight={120}
-				itemStyle={{
-					justifyContent: 'flex-start',
-				}}
-				dropDownStyle={{ backgroundColor: 'rgba(255,255,255,0.3)', borderColor: 'rgba(255,255,255,0)' }}
-				placeholder={'Select a city'}
-				arrowStyle={{ marginRight: 150 }}
-				labelStyle={{ color: '#FFFFFF', backgroundColor: 'rgba(255,255,255,0)', fontSize: 20 }}
-				containerStyle={{ height: 40, width: '100%' }}
-				onChangeItem={(item) => handleSelectedCity(item.value)}
-			/>
+			<View style={styles.content}>
+				{/* TODO: Improve css to fit different screens */}
+				<Image source={pin} style={styles.pin} />
+				{/* TODO: Make this list dynamic */}
+				<DropDownPicker
+					items={[
+						{ label: 'Stockholm', value: 'Stockholm' },
+						{ label: 'London', value: 'London' },
+						{ label: 'Moscow', value: 'Moscow' },
+						{ label: 'Tokyo', value: 'Tokyo' },
+						{ label: 'Nairobi', value: 'Nairobi' },
+					]}
+					style={{
+						backgroundColor: 'rgba(255,255,255,0)',
+						borderColor: 'rgba(255,255,255,0)',
+					}}
+					arrowColor="#FFFFFF"
+					defaultIndex={0}
+					dropDownMaxHeight={160}
+					itemStyle={{
+						justifyContent: 'flex-start',
+					}}
+					dropDownStyle={{ backgroundColor: 'rgba(255,255,255,0.3)', borderColor: 'rgba(255,255,255,0)' }}
+					placeholder={'Select a city'}
+					arrowStyle={{ marginRight: 130 }}
+					labelStyle={{ color: '#FFFFFF', backgroundColor: 'rgba(255,255,255,0)', fontSize: 20 }}
+					containerStyle={{ height: 40, width: '90%' }}
+					onChangeItem={(item) => handleSelectedCity(item.value)}
+				/>
+			</View>
 			<View style={styles.weatherNow}>
 				{displayWeatherNow && <WeatherNow weatherDataDisplay={weatherDataDisplay} />}
 			</View>
@@ -104,16 +109,21 @@ const styles = StyleSheet.create({
 		backgroundColor: '#47BFDF',
 	},
 	content: {
-		padding: 40,
+		flexDirection: 'row',
+		alignItems: 'center',
+		justifyContent: 'space-between',
+		marginTop: 10,
+		padding: 10,
+		zIndex: 1
 	},
-	pin: { width: 20, height: 20, marginTop: 10 },
+	pin: { width: 20, height: 20 },
 	dropdown: {
 		flexDirection: 'row',
 		justifyContent: 'space-evenly',
 		marginTop: 10,
 	},
 	weatherNow: {
-		flex: 2,
+		flex: 1,
 	},
 	buttonWrapper: {
 		borderRadius: 20,
@@ -135,7 +145,6 @@ const styles = StyleSheet.create({
 		left: 0,
 		right: 0,
 		top: 0,
-		height: 700,
 	},
 });
 

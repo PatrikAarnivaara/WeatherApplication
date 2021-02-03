@@ -29,7 +29,7 @@ const WeatherNow = ({ weatherDataDisplay }) => {
 				<Text style={styles.description}>{description}</Text>
 				<View style={styles.windHumWrapper}>
 					<View style={styles.windHumContent}>
-						<View style={styles.windyIcon}>
+						<View>
 							<Image source={windIcon} style={{ width: 20, height: 20 }} />
 						</View>
 						<View>
@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 	},
 	largeIcon: {
-		top: '10%',
+		top: '6%',
 	},
 	focus: {
 		alignItems: 'center',
@@ -109,9 +109,6 @@ const styles = StyleSheet.create({
 		flexDirection: 'column',
 		justifyContent: 'space-between',
 	},
-	windyIcon: {
-		marginRight: 0,
-	},
 	windHumContent: {
 		flexDirection: 'row',
 		justifyContent: 'space-between',
@@ -123,7 +120,6 @@ const styles = StyleSheet.create({
 		color: '#FFFFFF',
 		fontFamily: 'Overpass_400Regular',
 		fontSize: 16,
-		
 	},
 	background: {
 		position: 'absolute',

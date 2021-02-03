@@ -44,13 +44,13 @@ const styles = StyleSheet.create({
 	textTemp: {
 		color: '#FFFFFF',
 		fontFamily: 'Overpass_400Regular',
-		marginBottom: 14
+		marginBottom: 14,
 	},
 	textHour: {
 		color: '#FFFFFF',
 		fontFamily: 'Overpass_400Regular',
-		marginTop: 14
-	}
+		marginTop: 14,
+	},
 });
 
 export default WeatherHours;

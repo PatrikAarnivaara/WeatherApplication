@@ -6,10 +6,6 @@ import WeatherNow from '../components/WeatherNow';
 import pin from '../../assets/pin.png';
 
 const HomeScreen = ({ navigation }) => {
-	let items = [
-		{ label: 'UK', value: 'uk' },
-		{ label: 'France', value: 'france' },
-	];
 	const [cities, setCities] = useState([]);
 	const [weatherData, setWeatherData] = useState([]);
 	const [selectedCityCoord, setSelectedCityCoord] = useState({ lat: '', lon: '' });
@@ -29,7 +25,9 @@ const HomeScreen = ({ navigation }) => {
 			try {
 				const response = await openWeatherMapApi();
 				setWeatherData(response);
-				setCityList(response);
+				if (cities.length < 5 ) {
+					setCityList(response);
+				}
 			} catch (error) {
 				console.log(error);
 			}
@@ -38,9 +36,9 @@ const HomeScreen = ({ navigation }) => {
 	}, [setWeatherData, setCityList]);
 
 	const setCityList = (res) => {
-		res.map((city) => {
-			setCities((cities) => [...cities, { label: city.name, value: city.name }]);
-		});
+		for (let i = 0; i < res.length; i++) {
+			setCities((cities) => [...cities, { label: res[i].name, value: res[i].name }]);
+		}
 	};
 
 	const displaySelectedCityWeatherInfo = (item) => {
@@ -63,19 +61,19 @@ const HomeScreen = ({ navigation }) => {
 		displaySelectedCityWeatherInfo(infoDisplay);
 	};
 
-	console.log(cities);
-
 	return (
 		<View style={styles.container}>
 			<View style={styles.content}>
 				{/* TODO: Improve css to fit different screens */}
 				<Image source={pin} style={styles.pin} />
-				{/* TODO: Make this list dynamic */}
 				<DropDownPicker
 					items={cities ? cities : [{ label: 'Stockholm', value: 'Stockholm' }]}
 					style={{
 						backgroundColor: 'rgba(255,255,255,0)',
 						borderColor: 'rgba(255,255,255,0)',
+						...(Platform.OS !== 'android' && {
+							zIndex: 10,
+						}),
 					}}
 					arrowColor="#FFFFFF"
 					defaultIndex={0}

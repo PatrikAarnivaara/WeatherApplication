@@ -4,8 +4,8 @@ Weather application made with React Native
 # Weather Application
 
 ## Screenshots
-![](screenshot1.png =100)
-![](screenshot2.png =100)
+![](screenshot1.png =100x)
+![](screenshot2.png =100x)
 
 ## Technologies
 * React Native

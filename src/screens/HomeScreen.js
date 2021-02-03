@@ -10,7 +10,7 @@ const HomeScreen = ({ navigation }) => {
 		{ label: 'UK', value: 'uk' },
 		{ label: 'France', value: 'france' },
 	];
-	const [cities, setCities] = useState([{ label: 'Stockholm', value: 'Stockholm' }]);
+	const [cities, setCities] = useState([]);
 	const [weatherData, setWeatherData] = useState([]);
 	const [selectedCityCoord, setSelectedCityCoord] = useState({ lat: '', lon: '' });
 	const [weatherDataDisplay, setWeatherDataDisplay] = useState({
@@ -38,8 +38,8 @@ const HomeScreen = ({ navigation }) => {
 	}, [setWeatherData, setCityList]);
 
 	const setCityList = (res) => {
-		res.for((city, index) => {
-			setCities([...cities, { label: city[index].name, value: city[index].name }]);
+		res.map((city) => {
+			setCities((cities) => [...cities, { label: city.name, value: city.name }]);
 		});
 	};
 
@@ -62,6 +62,8 @@ const HomeScreen = ({ navigation }) => {
 		const infoDisplay = weatherData.find((item) => item.name === cityNameSelected);
 		displaySelectedCityWeatherInfo(infoDisplay);
 	};
+
+	console.log(cities);
 
 	return (
 		<View style={styles.container}>

@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { ActivityIndicator, FlatList, StyleSheet, Text, View, TouchableOpacity, SafeAreaView } from 'react-native';
+import { ActivityIndicator, FlatList, StyleSheet, Text, View, Image } from 'react-native';
 import openWeatherMapApiOneLocation from '../../api/openWeatherMapApiOneLocation';
 import ConvertUTCToLocalDate from '../utilities/ConvertUTCToLocalDate';
 import WeatherHours from '../components/Lists/WeatherHours';
 import WeatherDays from '../components/Lists/WeatherDays';
 import BackButton from '../components/UI/BackButton';
 import Footer from '../components/UI/Footer';
+import calender from '../../assets/calender.png';
 
 const DetailsScreen = ({ route, navigation }) => {
 	const { lat, lon, date } = route.params;
@@ -34,14 +35,15 @@ const DetailsScreen = ({ route, navigation }) => {
 		<View style={styles.container}>
 			<View style={styles.content}>
 				<BackButton navigation={navigation} />
-				<View style={styles.headingHoursWrapper}>
-					<Text style={styles.headingHoursContent}>Today</Text>
-					<Text style={styles.headingHoursContent}>
+				<View style={styles.headerHoursWrapper}>
+					<Text style={styles.headerHoursContent}>Today</Text>
+					<Text style={styles.headerHoursContent}>
 						{localDate.toLocaleString('en-US', { month: 'long' }).substr(0, 3)},{' '}
 						{localDate.toLocaleString('en-US', { day: 'numeric' })}
 					</Text>
 				</View>
 				<View style={styles.listHours}>
+					{/* TODO: Add safeArray */}
 					{isLoadingHours ? (
 						<ActivityIndicator />
 					) : (
@@ -56,8 +58,10 @@ const DetailsScreen = ({ route, navigation }) => {
 					)}
 				</View>
 
-				<Text style={styles.heading}>Next Forecast</Text>
-				{/* TODO: Add calender icon */}
+				<View style={styles.headerForecast}>
+					<Text style={styles.headerText}>Next Forecast</Text>
+					<Image source={calender} style={{ width: 20, height: 20 }} />
+				</View>
 				<View style={styles.listDays}>
 					{isLoadingDays ? (
 						<ActivityIndicator />
@@ -85,20 +89,25 @@ const styles = StyleSheet.create({
 	content: {
 		padding: 40,
 	},
-	heading: {
+	headerText: {
 		color: '#FFFFFF',
 		fontSize: 18,
 		marginBottom: 5,
 	},
-	headingHoursWrapper: {
+	headerHoursWrapper: {
 		flexDirection: 'row',
 		alignItems: 'baseline',
 		justifyContent: 'space-between',
 		marginBottom: 5,
 	},
-	headingHoursContent: {
+	headerHoursContent: {
 		color: '#FFFFFF',
 		fontSize: 18,
+	},
+	headerForecast: {
+		flexDirection: 'row',
+		alignItems: 'baseline',
+		justifyContent: 'space-between',
 	},
 	listHours: {
 		marginTop: 20,

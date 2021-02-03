@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View, Image } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
 import DropDownPicker from 'react-native-dropdown-picker';
 import openWeatherMapApi from '../../api/openWeatherMapApi';
 import WeatherNow from '../components/WeatherNow';
 import pin from '../../assets/pin.png';
 
 const HomeScreen = ({ navigation }) => {
+	let items = [
+		{ label: 'UK', value: 'uk' },
+		{ label: 'France', value: 'france' },
+	];
+	const [cities, setCities] = useState([{ label: 'Stockholm', value: 'Stockholm' }]);
 	const [weatherData, setWeatherData] = useState([]);
-	const [value, setValue] = useState('');
 	const [selectedCityCoord, setSelectedCityCoord] = useState({ lat: '', lon: '' });
 	const [weatherDataDisplay, setWeatherDataDisplay] = useState({
 		cityName: '',
@@ -19,7 +22,6 @@ const HomeScreen = ({ navigation }) => {
 		wind: '',
 		humidity: '',
 	});
-	const [isLoading, setLoading] = useState(true);
 	const [displayWeatherNow, setDisplayWeatherNow] = useState(false);
 
 	useEffect(() => {
@@ -27,13 +29,19 @@ const HomeScreen = ({ navigation }) => {
 			try {
 				const response = await openWeatherMapApi();
 				setWeatherData(response);
-				setLoading(false);
+				setCityList(response);
 			} catch (error) {
 				console.log(error);
 			}
 		};
 		getWeatherData();
-	}, [setWeatherData]);
+	}, [setWeatherData, setCityList]);
+
+	const setCityList = (res) => {
+		res.for((city, index) => {
+			setCities([...cities, { label: city[index].name, value: city[index].name }]);
+		});
+	};
 
 	const displaySelectedCityWeatherInfo = (item) => {
 		setDisplayWeatherNow(true);
@@ -62,13 +70,7 @@ const HomeScreen = ({ navigation }) => {
 				<Image source={pin} style={styles.pin} />
 				{/* TODO: Make this list dynamic */}
 				<DropDownPicker
-					items={[
-						{ label: 'Stockholm', value: 'Stockholm' },
-						{ label: 'London', value: 'London' },
-						{ label: 'Moscow', value: 'Moscow' },
-						{ label: 'Tokyo', value: 'Tokyo' },
-						{ label: 'Nairobi', value: 'Nairobi' },
-					]}
+					items={cities ? cities : [{ label: 'Stockholm', value: 'Stockholm' }]}
 					style={{
 						backgroundColor: 'rgba(255,255,255,0)',
 						borderColor: 'rgba(255,255,255,0)',
@@ -114,7 +116,7 @@ const styles = StyleSheet.create({
 		justifyContent: 'space-between',
 		marginTop: 10,
 		padding: 10,
-		zIndex: 1
+		zIndex: 1,
 	},
 	pin: { width: 20, height: 20 },
 	dropdown: {

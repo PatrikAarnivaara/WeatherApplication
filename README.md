@@ -1,7 +1,5 @@
-# weather-application
-Weather application made with React Native
-
 # Weather Application
+Weather application made with React Native
 
 ## Screenshots
 <img src="https://res.cloudinary.com/whatwherewhen/image/upload/v1612358326/weather/ybu31p1kuy2dbhp1myz4.png" width="auto" height="500">

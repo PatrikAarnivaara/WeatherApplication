@@ -17,7 +17,7 @@ Weather application made with React Native
 * Pre-selected city on start
 
 ## Setup
-1. To run the application you need to get an API-key from OpenWeather https://openweathermap.org/.
+1. To run the application you need to get an API-key from OpenWeather https://openweathermap.org/
 2. Clone repo and run in optional IDE, first run "npm install" then in the root directory "npm start" to start the expo server which opens the Metro Bundler on localhost:19002 where you can choose to open it an a web browser or simulator. Currently works best on an iPhone 8.
 
 ## Status

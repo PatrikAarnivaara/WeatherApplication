@@ -4,8 +4,8 @@ Weather application made with React Native
 # Weather Application
 
 ## Screenshots
-![](screenshot1.png)
-![](screenshot2.png)
+![](screenshot1.png | width=100)
+![](screenshot2.png | width=100)
 
 ## Technologies
 * React Native
@@ -16,6 +16,8 @@ Weather application made with React Native
 
 ## Upcoming improvements
 * Make application responsive to different mobile screen sizes and Android
+* Make items list dynamic
+* Pre-selected city on start
 
 ## Setup
 1. To run the application you need to get an API-key from OpenWeather.

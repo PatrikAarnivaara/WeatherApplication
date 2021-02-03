@@ -4,8 +4,8 @@ Weather application made with React Native
 # Weather Application
 
 ## Screenshots
-<img src="https://res.cloudinary.com/whatwherewhen/image/upload/v1612358326/weather/domhji8yshskbypydzah.png" width="auto" height="100">
-![](https://res.cloudinary.com/whatwherewhen/image/upload/v1612358326/weather/ybu31p1kuy2dbhp1myz4.png)
+<img src="https://res.cloudinary.com/whatwherewhen/image/upload/v1612358326/weather/domhji8yshskbypydzah.png" width="auto" height="300">
+<img src="https://res.cloudinary.com/whatwherewhen/image/upload/v1612358326/weather/ybu31p1kuy2dbhp1myz4.png" width="auto" height="300">
 
 ## Technologies
 * React Native

@@ -57,7 +57,9 @@ const HomeScreen = ({ navigation }) => {
 
 	return (
 		<View style={styles.container}>
+			{/* TODO: Improve css to fit different screens and align pin with dropdown */}
 			<Image source={pin} style={styles.pin} />
+			{/* TODO: Make this list dynamic */}
 			<DropDownPicker
 				items={[
 					{ label: 'Stockholm', value: 'Stockholm' },

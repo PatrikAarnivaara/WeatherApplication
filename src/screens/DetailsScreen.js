@@ -57,7 +57,7 @@ const DetailsScreen = ({ route, navigation }) => {
 				</View>
 
 				<Text style={styles.heading}>Next Forecast</Text>
-
+				{/* TODO: Add calender icon */}
 				<View style={styles.listDays}>
 					{isLoadingDays ? (
 						<ActivityIndicator />

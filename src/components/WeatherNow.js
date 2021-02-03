@@ -35,6 +35,7 @@ const WeatherNow = ({ weatherDataDisplay }) => {
 						<View>
 							<Text style={styles.text}>Wind</Text>
 						</View>
+						{/* TODO: Vertical lines has to align */}
 						<View>
 							<Text style={styles.text}>|</Text>
 						</View>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, TouchableOpacity, View, Image } from 'react-native';
+import { StyleSheet, Text, Pressable, View, Image } from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
 import openWeatherMapApi from '../../api/openWeatherMapApi';
 import WeatherNow from '../components/WeatherNow';
@@ -19,13 +19,14 @@ const HomeScreen = ({ navigation }) => {
 		humidity: '',
 	});
 	const [displayWeatherNow, setDisplayWeatherNow] = useState(false);
+	const [controlForecastButton, setControlForecastButton] = useState(true);
 
 	useEffect(() => {
 		const getWeatherData = async () => {
 			try {
 				const response = await openWeatherMapApi();
 				setWeatherData(response);
-				if (cities.length < 5 ) {
+				if (cities.length < 5) {
 					setCityList(response);
 				}
 			} catch (error) {
@@ -54,6 +55,7 @@ const HomeScreen = ({ navigation }) => {
 			humidity: item.main.humidity,
 		});
 		setSelectedCityCoord({ ...selectedCityCoord, lat: item.coord.lat, lon: item.coord.lon, date: item.dt });
+		setControlForecastButton(false);
 	};
 
 	const handleSelectedCity = (cityNameSelected) => {
@@ -92,12 +94,16 @@ const HomeScreen = ({ navigation }) => {
 			<View style={styles.weatherNow}>
 				{displayWeatherNow && <WeatherNow weatherDataDisplay={weatherDataDisplay} />}
 			</View>
-			<TouchableOpacity
-				style={styles.buttonWrapper}
+			<Pressable
+				disabled={controlForecastButton}
+				style={({ pressed }) => [
+					{ backgroundColor: pressed ? 'rgba(255,255,255,0.5)' : '#fff' },
+					styles.button,
+				]}
 				onPress={() => navigation.navigate('Details', selectedCityCoord)}
 			>
-				<Text style={styles.button}>Forecast report</Text>
-			</TouchableOpacity>
+				{({ pressed }) => <Text style={styles.buttonText}>{pressed ? 'Forecast coming up!' : 'Forecast report'}</Text>}
+			</Pressable>
 		</View>
 	);
 };
@@ -127,7 +133,7 @@ const styles = StyleSheet.create({
 	weatherNow: {
 		flex: 1,
 	},
-	buttonWrapper: {
+	button: {
 		borderRadius: 20,
 		width: '60%',
 		borderWidth: 1,
@@ -136,9 +142,8 @@ const styles = StyleSheet.create({
 		paddingBottom: 12,
 		paddingLeft: 20,
 		paddingRight: 20,
-		backgroundColor: '#fff',
 	},
-	button: {
+	buttonText: {
 		textAlign: 'center',
 		color: '#444E72',
 	},

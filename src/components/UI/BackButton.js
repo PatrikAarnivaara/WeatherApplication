@@ -1,14 +1,14 @@
 import React from 'react';
-import { Image, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, Pressable } from 'react-native';
 import arrow from '../../../assets/arrow.png';
 
 const BackButton = ({ navigation }) => {
 	return (
 		<View>
-			<TouchableOpacity style={styles.content} onPress={() => navigation.goBack()}>
+			<Pressable style={styles.content} onPress={() => navigation.goBack()}>
 				<Image source={arrow} style={{ height: 18, width: 12 }} />
 				<Text style={styles.backButton}>Back</Text>
-			</TouchableOpacity>
+			</Pressable>
 		</View>
 	);
 };

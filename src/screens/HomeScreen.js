@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, Pressable, View, Image } from 'react-native';
+import { Platform, StyleSheet, Text, Pressable, View, Image } from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
 import openWeatherMapApi from '../../api/openWeatherMapApi';
 import WeatherNow from '../components/WeatherNow';
@@ -73,9 +73,9 @@ const HomeScreen = ({ navigation }) => {
 					style={{
 						backgroundColor: 'rgba(255,255,255,0)',
 						borderColor: 'rgba(255,255,255,0)',
-						/* ...(Platform.OS !== 'android' && {
+						...(Platform.OS !== 'android' && {
 							zIndex: 10,
-						}), */
+						}),
 					}}
 					arrowColor="#FFFFFF"
 					defaultIndex={0}

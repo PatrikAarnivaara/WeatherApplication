@@ -17,7 +17,11 @@ Weather application made with React Native
 
 ## Setup
 1. To run the application you need to get an API-key from OpenWeather https://openweathermap.org/
-2. Clone repo and run in optional IDE, first run "npm install" then in the root directory "npm start" to start the expo server which opens the Metro Bundler on localhost:19002 where you can choose to open it an a web browser or simulator.
+2. Clone repo and open in optional IDE. 
+3. cd into root directory. 
+4. Run "npm install".
+5. When dependencies are installed run "npm start" to start the expo server. 
+6. Expo opens the Metro Bundler on localhost:19002 where you can choose to open it an a web browser or simulator.
 
 ## Status
 Project is: _ongoing_

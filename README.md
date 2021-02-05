@@ -14,7 +14,6 @@ Weather application made with React Native
 
 ## Upcoming improvements
 * Make application responsive to different mobile screen sizes and Android
-* Pre-selected city on start
 
 ## Setup
 1. To run the application you need to get an API-key from OpenWeather https://openweathermap.org/
